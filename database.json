@@ -1,5 +1,6 @@
 {
-    "nextBlogNumber": "4",
+    "totalBlogPosts": "2",
+    "nextBlogNumber": "3",
     "blogPosts": [{
         "number": "1",
         "date": "09/03/2016",
