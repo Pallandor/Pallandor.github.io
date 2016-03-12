@@ -2,8 +2,19 @@
 var table = {
     localPostsTotal: null,
     render: function tableRenderer(blog) {
-    	// Track the locally rendered table's total posts
-    	this.localPostsTotal = blog.totalBlogPosts; 
+        // Track the locally rendered table's total posts
+        
+        // if table never rendered... localPosts=blogposts
+        // but if table was rendered... then compare localPosts vs blogPosts
+        // and the array to use will be a sliced vers of blogPosts
+
+        // CRAP I need a custom web server that accepts POST requests
+        // so I can update database.json... 
+        // like express app.post('url', function(){...THE STUFF TO DO...}); 
+
+        // But its hosted on github. just do a git api call to update
+        // the database object like
+        // 
 
         blog.blogPosts.forEach(function(post) {
             $('.blog-table-body').append('<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>');
@@ -13,6 +24,8 @@ var table = {
 
 // $ document.ready
 $(function() {
+
+	// setInterval()
 
     // Render blog table with current blog posts
     $.get('/database.json', function(data) {
