@@ -1,6 +1,7 @@
 // Testing Browserify style bundling build
-var m = require('moment');
-var g = require('github-api');
+var moment = require('moment');
+var Github = require('github-api'); // The expected start function Github gets exported. So no need to
+// call g.Github just assign it to Github. Like that. 
 
 // For purposes of adding a blog post: 
 var table = {
