@@ -12,9 +12,11 @@ $(function() {
     // Render blog table with current blog posts
     $.get('/database.json', function(data) {
 
+    	console.log('is this get request running?');
+    	
         // If jQuery doesn't automatically return a JS object, parse the JSON string
         var blogData = typeof data === 'string' ? JSON.parse(data) : data;
-        localPostsTotal = blogData.totalBlogPosts;
+        // localPostsTotal = blogData.totalBlogPosts;
 
         blogData.blogPosts.forEach(function(post) {
             $('.blog-table-body').append('<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>');
