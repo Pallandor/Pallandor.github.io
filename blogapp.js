@@ -67,7 +67,8 @@ $(function() {
     //         sha: '0dc205cbdaa5dcd142a43d8d4661bc534c98bad9'
     //     }
     // })
-
+    console.log(g); // SEE what's in here
+    
     // USING: Github api library. 
     // Have to reveal limited access token ugh. 
     var github = new g.Github({
