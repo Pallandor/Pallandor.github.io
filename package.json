@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Pallandor/Pallandor.github.io#readme",
   "dependencies": {
+    "github-api": "^0.11.2",
     "moment": "^2.12.0"
   }
 }
