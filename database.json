@@ -1,1 +1,13 @@
-{}
+{
+    "nextBlogNumber": "4",
+    "blogPosts": [{
+        "number": "1",
+        "date": "09/03/2016",
+        "content": "Blah Blah Blah"
+    }, 
+    {
+        "number": "2",
+        "date": "13/03/2016",
+        "content": "More Blah Blah"
+    }]
+}
