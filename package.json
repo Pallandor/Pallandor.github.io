@@ -1,0 +1,19 @@
+{
+  "name": "pallandor.github.io",
+  "version": "0.0.0",
+  "description": "",
+  "main": "blogapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pallandor/Pallandor.github.io.git"
+  },
+  "author": "Pallandor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pallandor/Pallandor.github.io/issues"
+  },
+  "homepage": "https://github.com/Pallandor/Pallandor.github.io#readme"
+}
