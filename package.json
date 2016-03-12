@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Pallandor/Pallandor.github.io/issues"
   },
-  "homepage": "https://github.com/Pallandor/Pallandor.github.io#readme"
+  "homepage": "https://github.com/Pallandor/Pallandor.github.io#readme",
+  "dependencies": {
+    "moment": "^2.12.0"
+  }
 }
