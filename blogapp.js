@@ -1,3 +1,7 @@
+// Testing Browserify style bundling build
+var m = require('moment');
+var g = require('github-api');
+
 // For purposes of adding a blog post: 
 var table = {
     localPostsTotal: null,
@@ -66,8 +70,8 @@ $(function() {
 
     // USING: Github api library. 
     // Have to reveal limited access token ugh. 
-    var github = new Github({
-    	token: '0dc205cbdaa5dcd142a43d8d4661bc534c98bad9',
+    var github = new g.Github({
+    	token: 'd838b2b169dae465506acfe8817a4c0b1cc69f8d',
     	auth: 'oauth'
     });
 
