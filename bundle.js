@@ -33,34 +33,46 @@ var table = {
 
         });
     },
-    add: function(formContent){
-    	console.log('testing to see if formContent obj passed correclty to table.add');
-    	console.log(formContent); 
-        // will need to combine the post info 
+    add: function(formContent) {
+        var github = new Github({
+            token: formContent.token,
+            auth: 'oauth'
+        });
+
+        var repo = github.getRepo('Pallandor', 'Pallandor.github.io');
+
+        var options = {
+            author: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+            committer: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+            encode: true // Whether to base64 encode the file. (default: true)
+        };
+
+        // before you write the new content. you need ot grab the original database.json
+        repo.read('master', 'test.json', function(err, data) {
+            if (err) throw err;
+
+            console.log('how does it get read. if not json parsed, then do that first')
+            console.log(data);
+            console.log(typeof data); 
+
+            // repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
+            //     if (err) throw err;
+            // });
+        });
+
+
+        // repo.getRef('heads/master', function(err, sha) {
+        //     if (err) throw err;
+        //     console.log('the sha of my Pallandor.github.io repo is: ' + sha);
+        // });
     }
-    //     var github = new Github({
-    //     token: formContent.token,
-    //     auth: 'oauth'
-    // });
 
-    // var repo = github.getRepo('Pallandor', 'Pallandor.github.io');
 
-    // repo.getRef('heads/master', function(err, sha) {
-    //     if (err) throw err;
-    //     console.log('the sha of my Pallandor.github.io repo is: ' + sha);
-    // });
+
 
     // // GITHUB WORKS. BROWSERIFY WORKS. 
 
-    // var options = {
-    //     author: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
-    //     committer: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
-    //     encode: true // Whether to base64 encode the file. (default: true)
-    // };
 
-    // repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
-    //     if (err) throw err;
-    // });
 };
 
 // $ document.ready
@@ -88,7 +100,7 @@ $(function() {
         var page = $('.show-form').data();
 
         if (page.data === 'on-viewing-page') {
-            $('.show-form').text(s.text);  // Someone mentioned not to use .text due to mem leaks? Why? 
+            $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why? 
             $('.show-form').data(s);
         } else {
             $('.show-form').text(v.text);
@@ -97,18 +109,18 @@ $(function() {
 
     });
 
-    $('form').on('submit', function(event){
-        event.preventDefault(); 
+    $('form').on('submit', function(event) {
+        event.preventDefault();
         console.log('Submit button press attempted - version I\'m testing now');
 
         // grab the text for the blog post and pass it to table.add('blogtext'); 
         // could for .each on a general or general inputs, then .val retrieval per. 
         // but only 2 els in this case so grab individually.
         var formContent = {
-        	post: $('#input-blog').val(),
-        	token: $('#input-token').val()
+            post: $('#input-blog').val(),
+            token: $('#input-token').val()
         };
-        table.add(formContent); 
+        table.add(formContent);
 
         // Change this
         $('form').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
