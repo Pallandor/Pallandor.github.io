@@ -47,7 +47,7 @@ var table = {
         };
 
         // before you write the new content. you need ot grab the original database.json
-        repo.read('master', 'test.json', function(err, existingBlog) {
+        repo.read('master', 'database.json', function(err, existingBlog) {
             if (err) throw err;
 
             // already returns existingBlog as JSON.parsed workable js obj 
@@ -66,7 +66,7 @@ var table = {
 
             existingBlog = JSON.stringify(existingBlog);
 
-            repo.write('master', 'test.json', existingBlog, 'Testing commit with table add method on testjson re databasejson duplicate', options, function(err) {
+            repo.write('master', 'database.json', existingBlog, 'Testing commit with table add method on testjson re databasejson duplicate', options, function(err) {
                 if (err) throw err;
             });
         });
