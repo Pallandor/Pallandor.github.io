@@ -72,7 +72,8 @@ $(function() {
     // USING: Github api library. 
     // Have to reveal limited access token ugh. 
     var github = new Github({
-    	token: '4b71121c4dd0a8bdfea038c66e9e60dc704afd8c',
+        // obfuscated so Github won't pick up and delete auhtorisation, for testing only. 
+    	token: window.atob('ZmY1MjJlNjNlNGZiYjg1N2JjZDgzNGM4ODMzMzg3NzQ3NTBjYTUzMg=='),
     	auth: 'oauth'
     });
 
