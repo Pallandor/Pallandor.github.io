@@ -83,6 +83,8 @@ $(function() {
         console.log('the sha of my Pallandor.github.io repo is: ' + sha);
     });
 
+    // GITHUB WORKS. BROWSERIFY WORKS. 
+    
     // var options = {
     //     author: { name: 'Author Name', email: 'author@example.com' },
     //     committer: { name: 'Committer Name', email: 'committer@example.com' },
