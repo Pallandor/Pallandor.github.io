@@ -6,24 +6,30 @@ var Github = require('github-api'); // The expected start function Github gets e
 // For purposes of adding a blog post: 
 var table = {
     localPostsTotal: null,
-    render: function tableRenderer(blog) {
-        // Track the locally rendered table's total posts
+    render: function tableRenderer() {
+        // Alternatively, could bind the callback passed into $.get or call it linked to the outer this
+        // e.g. x.call(this); Actually can't call, that invokes. Bind would return a bound version of the
+        // function though. 
+        var blog, that = this;
+        // Grab database.json table
+        $.get('/database.json', function(data) {
+            // If jQuery doesn't automatically return a JS object, parse the JSON string
+            blog = typeof data === 'string' ? JSON.parse(data) : data;
 
-        // if table never rendered... localPosts=blogposts
-        // but if table was rendered... then compare localPosts vs blogPosts
-        // and the array to use will be a sliced vers of blogPosts
+            // diffing operation. 
+            if (that.localPostsTotal) { // if localPostsTotal has a value i.e. table was at least rendered once..
+                blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal); // use an array containing only
+                // blog posts not yet rendered. 
+            }
 
-        // CRAP I need a custom web server that accepts POST requests
-        // so I can update database.json... 
-        // like express app.post('url', function(){...THE STUFF TO DO...}); 
+            // Render the diffed array into the table
+            blog.blogPosts.forEach(function(post) {
+                $('.blog-table-body').append('<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>');
+            });
 
-        // But its hosted on github. just do a git api call to update
-        // the database.json file like git add git push etc.. 
-        // 
+            //Set localPostsTotal based on table currently rendered
+            that.localPostsTotal = blog.totalBlogPosts;
 
-
-        blog.blogPosts.forEach(function(post) {
-            $('.blog-table-body').append('<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>');
         });
     }
 };
@@ -31,13 +37,18 @@ var table = {
 // $ document.ready
 $(function() {
 
-    // setInterval()
 
-    // Render blog table with current blog posts
-    $.get('/database.json', function(data) {
-        // If jQuery doesn't automatically return a JS object, parse the JSON string
-        var blogData = typeof data === 'string' ? JSON.parse(data) : data;
-        table.render(blogData);
+    var pollDatabase = function() {
+        table.render();
+        setTimeout(pollDatabase, 5000);
+    };
+
+    pollDatabase();
+
+
+    $('.show-form').on('click', function() {
+        $('form').toggle();
+        $('table').toggle();
     });
 
     // Add blog post
@@ -52,46 +63,32 @@ $(function() {
     // i.e. slice the array ...  
     // and render those posts. 
 
-
-    // Let's test GIT api
-    // But if this code is not obfuscated, 
-    // when I do the authentication part... 
-    // it would need 
-    // I can just use limited scope personal access token. 
-    // $.ajax({
-    //     method: "PUT",
-    //     url: "https://api.github.com/repos/Pallandor/Pallandor.github.io/contents/test.json"
-    //     data: {
-    //         path: 'test.json',
-    //         message: 'Commit message for test GIT API update of test.json file',
-    //         content: window.btoa('{"did it replace":"we will find out"}'),
-    //         sha: '0dc205cbdaa5dcd142a43d8d4661bc534c98bad9'
-    //     }
-    // })
-    
     // USING: Github api library. 
     // Have to reveal limited access token ugh. 
-    var github = new Github({
-        // obfuscated so Github won't pick up and delete auhtorisation, for testing only. 
-    	token: window.atob('ZmY1MjJlNjNlNGZiYjg1N2JjZDgzNGM4ODMzMzg3NzQ3NTBjYTUzMg=='),
-    	auth: 'oauth'
-    });
+    // -------- ALL WORKING FROM BELOW HERE -------
+    // // WORKING GITHUB API STUFF: 
+    // var github = new Github({
+    //     // obfuscated so Github won't pick up and delete auhtorisation, for testing only. 
+    //     token: window.atob('ZmY1MjJlNjNlNGZiYjg1N2JjZDgzNGM4ODMzMzg3NzQ3NTBjYTUzMg=='),
+    //     auth: 'oauth'
+    // });
 
-    var repo = github.getRepo('Pallandor','Pallandor.github.io');
+    // var repo = github.getRepo('Pallandor', 'Pallandor.github.io');
 
-    repo.getRef('heads/master', function(err, sha) {
-        console.log('the sha of my Pallandor.github.io repo is: ' + sha);
-    });
+    // repo.getRef('heads/master', function(err, sha) {
+    //     if (err) throw err;
+    //     console.log('the sha of my Pallandor.github.io repo is: ' + sha);
+    // });
 
-    // GITHUB WORKS. BROWSERIFY WORKS. 
+    // // GITHUB WORKS. BROWSERIFY WORKS. 
 
-    var options = {
-        author: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
-        committer: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
-        encode: true // Whether to base64 encode the file. (default: true)
-    }
-    repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
-        console.log('some error occured? :' + err); 
-    });
-    // just realised i'd need to fetch the current test.json. then just add or change to it... maybe. think on it. 
+    // var options = {
+    //     author: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+    //     committer: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+    //     encode: true // Whether to base64 encode the file. (default: true)
+    // };
+
+    // repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
+    //     if (err) throw err;
+    // });
 });
