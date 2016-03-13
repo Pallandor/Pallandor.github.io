@@ -47,16 +47,28 @@ var table = {
         };
 
         // before you write the new content. you need ot grab the original database.json
-        repo.read('master', 'test.json', function(err, data) {
+        repo.read('master', 'test.json', function(err, existingBlog) {
             if (err) throw err;
 
-            console.log('how does it get read. if not json parsed, then do that first')
-            console.log(data);
-            console.log(typeof data); 
+            // already returns existingBlog as JSON.parsed workable js obj 
 
-            // repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
-            //     if (err) throw err;
-            // });
+            //prepared updated database object to overwrite existing database.json
+            // remenerbt ot json stringify before sending...
+            existingBlog.blogPosts.push({
+                number: existingBlog.nextBlogNumber,
+                date: moment().format('MMMM Do YYYY, h:mm:ss'),
+                content: formContent.post
+                    // replace above ref with 'this', sort out how to.
+            });
+
+            existingBlog.totalBlogPosts++;
+            existingBlog.nextBlogNumber++;
+
+            existingBlog = JSON.stringify(existingBlog);
+
+            repo.write('master', 'test.json', existingBlog, 'Testing commit with table add method on testjson re databasejson duplicate', options, function(err) {
+                if (err) throw err;
+            });
         });
 
 

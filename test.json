@@ -1,1 +1,14 @@
-{"see if it":"works in overiwting via commit"}
+{
+    "totalBlogPosts": "2",
+    "nextBlogNumber": "3",
+    "blogPosts": [{
+        "number": "1",
+        "date": "09/03/2016",
+        "content": "Blah Blah Blah"
+    }, 
+    {
+        "number": "2",
+        "date": "13/03/2016",
+        "content": "More Blah Blah"
+    }]
+}
