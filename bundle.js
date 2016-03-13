@@ -98,7 +98,8 @@ $(function() {
 
     $('form').on('submit', function(event){
         event.preventDefault(); 
-        console.log('Submit button press attempted');
+        console.log('Submit button press attempted - version I\'m testing now');
+        $('form').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
     });
 
     // Add blog post
