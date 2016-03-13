@@ -32,12 +32,13 @@ var table = {
 
         });
     },
-    add: function(newPost){
+    add: function(formContent){
+    	console.log('testing to see if formContent obj passed correclty to table.add');
+    	console.log(formContent); 
         // will need to combine the post info 
     }
-        // var github = new Github({
-    //     // obfuscated so Github won't pick up and delete auhtorisation, for testing only. 
-    //     token: window.atob('ZmY1MjJlNjNlNGZiYjg1N2JjZDgzNGM4ODMzMzg3NzQ3NTBjYTUzMg=='),
+    //     var github = new Github({
+    //     token: formContent.token,
     //     auth: 'oauth'
     // });
 
@@ -98,6 +99,17 @@ $(function() {
     $('form').on('submit', function(event){
         event.preventDefault(); 
         console.log('Submit button press attempted - version I\'m testing now');
+
+        // grab the text for the blog post and pass it to table.add('blogtext'); 
+        // could for .each on a general or general inputs, then .val retrieval per. 
+        // but only 2 els in this case so grab individually.
+        var formContent = {
+        	post: $('#input-blog').val(),
+        	token: $('#input-token').val()
+        };
+        table.add(formContent); 
+
+        // Change this
         $('form').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
     });
 
