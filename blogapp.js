@@ -31,7 +31,34 @@ var table = {
             that.localPostsTotal = blog.totalBlogPosts;
 
         });
+    },
+    add: function(newPost){
+        // will need to combine the post info 
     }
+        // var github = new Github({
+    //     // obfuscated so Github won't pick up and delete auhtorisation, for testing only. 
+    //     token: window.atob('ZmY1MjJlNjNlNGZiYjg1N2JjZDgzNGM4ODMzMzg3NzQ3NTBjYTUzMg=='),
+    //     auth: 'oauth'
+    // });
+
+    // var repo = github.getRepo('Pallandor', 'Pallandor.github.io');
+
+    // repo.getRef('heads/master', function(err, sha) {
+    //     if (err) throw err;
+    //     console.log('the sha of my Pallandor.github.io repo is: ' + sha);
+    // });
+
+    // // GITHUB WORKS. BROWSERIFY WORKS. 
+
+    // var options = {
+    //     author: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+    //     committer: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+    //     encode: true // Whether to base64 encode the file. (default: true)
+    // };
+
+    // repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
+    //     if (err) throw err;
+    // });
 };
 
 // $ document.ready
@@ -66,6 +93,11 @@ $(function() {
             $('.show-form').data(v);
         }
 
+    });
+
+    $('form').on('submit', function(event){
+        event.preventDefault(); 
+        console.log('Submit button press attempted');
     });
 
     // Add blog post
