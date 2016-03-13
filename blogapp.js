@@ -45,10 +45,27 @@ $(function() {
 
     pollDatabase();
 
+    // Objects for Jquery data persistence to elements - for toggling button text purposes 
+    var s = { text: 'Back to Blog Posts', data: 'on-submit-page' },
+        v = { text: 'Add Blog Post', data: 'on-viewing-page' };
+    // Default starts on blog posts.
+    $('.show-form').data(v);
 
+    //'on-submit-page'
     $('.show-form').on('click', function() {
         $('form').toggle();
         $('table').toggle();
+
+        var page = $('.show-form').data();
+
+        if (page.data === 'on-viewing-page') {
+            $('.show-form').text(s.text);  // Someone mentioned not to use .text due to mem leaks? Why? 
+            $('.show-form').data(s);
+        } else {
+            $('.show-form').text(v.text);
+            $('.show-form').data(v);
+        }
+
     });
 
     // Add blog post
