@@ -84,12 +84,14 @@ $(function() {
     });
 
     // GITHUB WORKS. BROWSERIFY WORKS. 
-    
-    // var options = {
-    //     author: { name: 'Author Name', email: 'author@example.com' },
-    //     committer: { name: 'Committer Name', email: 'committer@example.com' },
-    //     encode: true // Whether to base64 encode the file. (default: true)
-    // }
-    // repo.write('master', 'path/to/file', 'YOUR_NEW_CONTENTS', 'YOUR_COMMIT_MESSAGE', options, function(err) {});
 
+    var options = {
+        author: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+        committer: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
+        encode: true // Whether to base64 encode the file. (default: true)
+    }
+    repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
+        console.log('some error occured? :' + err); 
+    });
+    // just realised i'd need to fetch the current test.json. then just add or change to it... maybe. think on it. 
 });
