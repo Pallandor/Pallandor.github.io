@@ -58,6 +58,7 @@ var table = {
             existingBlog.blogPosts.push({
                 number: existingBlog.nextBlogNumber,
                 date: moment().format('MMMM Do YYYY, h:mm:ss'),
+                title: formContent.title,
                 content: formContent.post
                     // replace above ref with 'this', sort out how to.
             });
@@ -65,9 +66,12 @@ var table = {
             existingBlog.totalBlogPosts++;
             existingBlog.nextBlogNumber++;
 
+            console.log('testing to see what existing blog in github api call be after new post added');
+            console.log(existingBlog); 
+
             existingBlog = JSON.stringify(existingBlog);
 
-            repo.write('master', 'database.json', existingBlog, 'Testing commit with table add method on testjson re databasejson duplicate', options, function(err) {
+            repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) throw err;
             });
         });
@@ -129,12 +133,14 @@ $(function() {
         // could for .each on a general or general inputs, then .val retrieval per. 
         // but only 2 els in this case so grab individually.
         var formContent = {
+        	title: $('#input-title').val(), 
             post: $('#input-blog').val(),
             token: $('#input-token').val()
         };
+        console.log(formContent); //TESTING - IF FORM CONTENT IS GRABBING TITLE NOW TOO. 
         table.add(formContent);
 
-        // Change this
+        // Change this/ Maybe hide in a div. 
         $('form').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
     });
 
