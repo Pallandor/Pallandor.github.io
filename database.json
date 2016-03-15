@@ -1,5 +1,1 @@
-{
-    "totalBlogPosts": "0",
-    "nextBlogNumber": "1",
-    "blogPosts": []
-}
+{"totalBlogPosts":1,"nextBlogNumber":2,"blogPosts":[{"number":"1","date":"March 16th 2016, 8:48:36","title":"First Post test","content":"balsdnlaksndka"}]}
