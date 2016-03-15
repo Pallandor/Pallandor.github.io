@@ -64,35 +64,30 @@ var table = {
 
             existingBlog.totalBlogPosts++;
             existingBlog.nextBlogNumber++;
-
-            console.log('testing to see what existing blog in github api call be after new post added');
-            console.log(existingBlog); 
-
             existingBlog = JSON.stringify(existingBlog);
 
+            // ASYNC flow is correct, write on successful repo.read event. 
             repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) throw err;
             });
+
+            // if success html already added to result div, then just toggle display. else add it. 
+            var res = $('.result-container').html();
+            if (!res.length){
+            	$('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
+            }
+            $('.result-container').toggle();
+            // pretty sure html will return array of jquery objects(?) of the HTML elements added. 
+            // maybe can chain, research more into jQuery if returns jQuery element initially started with
+
+
         });
-
-
-        // repo.getRef('heads/master', function(err, sha) {
-        //     if (err) throw err;
-        //     console.log('the sha of my Pallandor.github.io repo is: ' + sha);
-        // });
     }
-
-
-
-
-    // // GITHUB WORKS. BROWSERIFY WORKS. 
-
 
 };
 
 // $ document.ready
 $(function() {
-
 
     var pollDatabase = function() {
         table.render();
@@ -101,7 +96,8 @@ $(function() {
 
     pollDatabase();
 
-    // Objects for Jquery data persistence to elements - for toggling button text purposes 
+    // Objects for Jquery data persistence added to elements 
+    // via jquery.data method - for toggling button text purposes 
     var s = { text: 'Back to Blog Posts', data: 'on-submit-page' },
         v = { text: 'Add Blog Post', data: 'on-viewing-page' };
     // Default starts on blog posts.
@@ -118,29 +114,30 @@ $(function() {
             $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why? 
             $('.show-form').data(s);
         } else {
+
             $('.show-form').text(v.text);
             $('.show-form').data(v);
+            $('.result-container').toggle(); // so this one only toggles when click SUBMIT POT
+            // and when click BACK TO BLOG POSTS. good, only 2 points of toggle. 
         }
 
     });
 
     $('form').on('submit', function(event) {
         event.preventDefault();
-        console.log('Submit button press attempted - version I\'m testing now');
 
-        // grab the text for the blog post and pass it to table.add('blogtext'); 
-        // could for .each on a general or general inputs, then .val retrieval per. 
-        // but only 2 els in this case so grab individually.
         var formContent = {
-        	title: $('#input-title').val(), 
+            title: $('#input-title').val(),
             post: $('#input-blog').val(),
             token: $('#input-token').val()
         };
-        console.log(formContent); //TESTING - IF FORM CONTENT IS GRABBING TITLE NOW TOO. 
+
         table.add(formContent);
 
-        // Change this/ Maybe hide in a div. 
-        $('form').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
+        // ASYNC ISSUE: WHAT IF TABLE.ADD OPERATION TAKES LONGER TO RENDER THAN
+        // JQUERY ADDDING THE SUCCESS ALERT? SUCCESSFULLY ALERTED BEFORE TABLE RENDERED. 
+        // SUCCESS LOGIC WOULD NEED TO BE INCLUDED INSIDE TABLE.ADD 
+
     });
 
     // Add blog post

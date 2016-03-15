@@ -23,13 +23,17 @@
     div {
         margin: 10px;
     }
+   /* By default hide result container. */
+    .result-container {
+        display: none;
+    }
     </style>
     <h3>Pallandor's Blog</h3>
     <form>
   
             <div class="form-group">
             <label>Blog Title</label>
-            <input type="email" class="form-control" id='input-title' placeholder="Blog Title">
+            <input type="text" class="form-control" id='input-title' placeholder="Blog Title">
         </div>
         <div class="form-group">
             <label>Blog Post</label>
@@ -61,6 +65,11 @@
             <!-- OPTION: Use <br> to break up blog post with paragraphs. Or start and end each paragraph with <p></p> -->
         </tbody>
     </table>
+
+    <div class='result-container'>
+    <!-- place resulting alert here. Show and hide based on submit. But toggle hide form in interim.  -->
+    </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <!-- <script src='node_modules/github-api/src/github.js'></script>
