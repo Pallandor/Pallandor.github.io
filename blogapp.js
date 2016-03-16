@@ -47,6 +47,7 @@ var table = {
         };
 
         // before you write the new content. you need ot grab the original database.json
+        // alt doing it as a repo.read rather than AJAX call
         repo.read('master', 'database.json', function(err, existingBlog) {
             if (err) throw err;
 
@@ -73,10 +74,13 @@ var table = {
 
             // if success html already added to result div, then just toggle display. else add it. 
             var res = $('.result-container').html();
+            console.log('checking what resul-container.html() val and length is');
+            console.log(res); 
+            console.log(res.length); 
             if (!res.length){
             	$('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
             }
-            $('.result-container').toggle();
+            $('.result-container').show();
             // pretty sure html will return array of jquery objects(?) of the HTML elements added. 
             // maybe can chain, research more into jQuery if returns jQuery element initially started with
 
@@ -117,8 +121,7 @@ $(function() {
 
             $('.show-form').text(v.text);
             $('.show-form').data(v);
-            $('.result-container').toggle(); // so this one only toggles when click SUBMIT POT
-            // and when click BACK TO BLOG POSTS. good, only 2 points of toggle. 
+            $('.result-container').hide(); // don't toggle. make explicit shows/hides. 
         }
 
     });
@@ -140,44 +143,4 @@ $(function() {
 
     });
 
-    // Add blog post
-    // 1. Update database.json
-    // 2. re - render the entire table ? yuck..OR
-    // manually add to table in this instance ? OR
-    // have blog continually check
-    // if localPostsTotal which tracks
-    // the recently rendered tables posts number, is less than
-    // totalBlogPosts on the database.json(get that data again).
-    // IF it is, cycle through the difference 
-    // i.e. slice the array ...  
-    // and render those posts. 
-
-    // USING: Github api library. 
-    // Have to reveal limited access token ugh. 
-    // -------- ALL WORKING FROM BELOW HERE -------
-    // // WORKING GITHUB API STUFF: 
-    // var github = new Github({
-    //     // obfuscated so Github won't pick up and delete auhtorisation, for testing only. 
-    //     token: window.atob('ZmY1MjJlNjNlNGZiYjg1N2JjZDgzNGM4ODMzMzg3NzQ3NTBjYTUzMg=='),
-    //     auth: 'oauth'
-    // });
-
-    // var repo = github.getRepo('Pallandor', 'Pallandor.github.io');
-
-    // repo.getRef('heads/master', function(err, sha) {
-    //     if (err) throw err;
-    //     console.log('the sha of my Pallandor.github.io repo is: ' + sha);
-    // });
-
-    // // GITHUB WORKS. BROWSERIFY WORKS. 
-
-    // var options = {
-    //     author: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
-    //     committer: { name: 'Pallandor', email: 'roger.sejas@gmail.com' },
-    //     encode: true // Whether to base64 encode the file. (default: true)
-    // };
-
-    // repo.write('master', 'test.json', '{"see if it":"works in overiwting via commit"}', 'Testing commit via GIT API re test.json', options, function(err) {
-    //     if (err) throw err;
-    // });
 });

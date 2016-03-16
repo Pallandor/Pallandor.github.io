@@ -11,27 +11,31 @@
         /*If padding property has one value, top right bottom left padding is that one value */
         padding: 50px 100px 50px 50px;
     }
+    
     h3 {
-       text-align: center; 
+        text-align: center;
     }
+    
     form {
         display: none;
     }
+    
     table {
         display: show;
     }
+    
     div {
         margin: 10px;
     }
-   /* By default hide result container. */
+    /* By default hide result container. */
+    
     .result-container {
         display: none;
     }
     </style>
     <h3>Pallandor's Blog</h3>
     <form>
-  
-            <div class="form-group">
+        <div class="form-group">
             <label>Blog Title</label>
             <input type="text" class="form-control" id='input-title' placeholder="Blog Title">
         </div>
@@ -45,14 +49,13 @@
             <input type="password" class="form-control" id='input-token' placeholder="OAuth Token">
         </div>
         <div>
-        <button type="submit" class="btn btn-default submit-button">Submit Post</button>
+            <button type="submit" class="btn btn-default submit-button">Submit Post</button>
         </div>
     </form>
     <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
     <div>
         <button type="button" class="btn btn-primary show-form">Add Blog Post</button>
     </div>
-
     <table class="table blog-table">
         <thead>
             <tr>
@@ -65,9 +68,7 @@
             <!-- OPTION: Use <br> to break up blog post with paragraphs. Or start and end each paragraph with <p></p> -->
         </tbody>
     </table>
-
     <div class='result-container'></div>
-
 </body>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <!-- <script src='node_modules/github-api/src/github.js'></script>
