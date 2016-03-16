@@ -140,6 +140,7 @@ $(function() {
         };
 
         table.add(formContent);
+        alert('a process in SUBMIT-CLICK handler');
 
         // ASYNC ISSUE: WHAT IF TABLE.ADD OPERATION TAKES LONGER TO RENDER THAN
         // JQUERY ADDDING THE SUCCESS ALERT? SUCCESSFULLY ALERTED BEFORE TABLE RENDERED. 
