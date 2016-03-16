@@ -71,10 +71,19 @@ var table = {
             // ASYNC flow is correct, write on successful repo.read event. 
             repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) throw err;
+                alert('repo write to database.json was successful!');
             });
 
 
         });
+
+        // if success html not yet added to result div, add it, then show.
+        var res = $('.result-container').html();
+        if (!res.length) {
+            $('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
+        }
+        $('form').hide();
+        $('.result-container').show();
     }
 
 };
@@ -89,27 +98,30 @@ $(function() {
 
     pollDatabase();
 
-    // Objects for Jquery data persistence added to elements 
-    // via jquery.data method - for toggling button text purposes 
+    // Objects for persisting state in jQuery.data(); 
     var s = { text: 'Back to Blog Posts', data: 'on-submit-page' },
         v = { text: 'Add Blog Post', data: 'on-viewing-page' };
-    // Default starts on blog posts.
+    // Default start on-viewing-page
     $('.show-form').data(v);
 
     //'on-submit-page'
     $('.show-form').on('click', function() {
-        $('form').toggle();
-        $('table').toggle();
+        // $('form').toggle();
+        // $('table').toggle();
 
         var page = $('.show-form').data();
 
-        if (page.data === 'on-viewing-page') {
+        if (page.data === 'on-viewing-page') { // i.e. going-to-submit-page
+            $('table').hide();
+            $('form').show();
             $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why? 
             $('.show-form').data(s);
-        } else {
+        } else { //i.e. going-to-viewing-page
+            $('form').hide();
+            $('.result-container').hide(); // don't toggle. make explicit shows/hides. 
+            $('table').show();
             $('.show-form').text(v.text);
             $('.show-form').data(v);
-            $('.result-container').hide(); // don't toggle. make explicit shows/hides. 
         }
 
     });
@@ -124,29 +136,6 @@ $(function() {
         };
 
         table.add(formContent);
-        
-        // if success html already added to result div, then just toggle display. else add it. 
-        var res = $('.result-container').html();
-        console.log('checking what resul-container.html() val and length is');
-        console.log(res);
-        console.log(res.length);
-        if (!res.length) {
-            $('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
-            console.log('did it still go through assuming res.length is 0-here');
-        }
-
-        alert('alert happened. This should happen before the click on Back to blog posts resolves, shouldn it? i assumed it would be a blocking op');
-
-        $('form').hide();
-        $('.result-container').show();
-        // pretty sure html will return array of jquery objects(?) of the HTML elements added. 
-        // maybe can chain, research more into jQuery if returns jQuery element initially started with
-
-
-        // ASYNC ISSUE: WHAT IF TABLE.ADD OPERATION TAKES LONGER TO RENDER THAN
-        // JQUERY ADDDING THE SUCCESS ALERT? SUCCESSFULLY ALERTED BEFORE TABLE RENDERED. 
-        // SUCCESS LOGIC WOULD NEED TO BE INCLUDED INSIDE TABLE.ADD 
-
     });
 
 });
