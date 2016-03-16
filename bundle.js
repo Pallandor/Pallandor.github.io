@@ -73,23 +73,6 @@ var table = {
                 if (err) throw err;
             });
 
-            // if success html already added to result div, then just toggle display. else add it. 
-            var res = $('.result-container').html();
-            console.log('checking what resul-container.html() val and length is');
-            console.log(res);
-            console.log(res.length);
-            if (!res.length) {
-                $('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
-                console.log('did it still go through assuming res.length is 0-here');
-            }
-
-            alert('alert happened. This should happen before the click on Back to blog posts resolves, shouldn it? i assumed it would be a blocking op'); 
-
-            $('form').hide();
-            $('.result-container').show();
-            // pretty sure html will return array of jquery objects(?) of the HTML elements added. 
-            // maybe can chain, research more into jQuery if returns jQuery element initially started with
-
 
         });
     }
@@ -141,7 +124,24 @@ $(function() {
         };
 
         table.add(formContent);
-        alert('a process in SUBMIT-CLICK handler');
+        
+        // if success html already added to result div, then just toggle display. else add it. 
+        var res = $('.result-container').html();
+        console.log('checking what resul-container.html() val and length is');
+        console.log(res);
+        console.log(res.length);
+        if (!res.length) {
+            $('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
+            console.log('did it still go through assuming res.length is 0-here');
+        }
+
+        alert('alert happened. This should happen before the click on Back to blog posts resolves, shouldn it? i assumed it would be a blocking op');
+
+        $('form').hide();
+        $('.result-container').show();
+        // pretty sure html will return array of jquery objects(?) of the HTML elements added. 
+        // maybe can chain, research more into jQuery if returns jQuery element initially started with
+
 
         // ASYNC ISSUE: WHAT IF TABLE.ADD OPERATION TAKES LONGER TO RENDER THAN
         // JQUERY ADDDING THE SUCCESS ALERT? SUCCESSFULLY ALERTED BEFORE TABLE RENDERED. 
