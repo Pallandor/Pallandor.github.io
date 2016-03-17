@@ -112,6 +112,7 @@ $(function() {
 
         if (page.data === 'on-viewing-page') { // i.e. going-to-submit-page
             $('table').hide();
+            $('form')[0].reset(); //grab 1st dom element. 
             $('form').show();
             $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why? 
             $('.show-form').data(s);
