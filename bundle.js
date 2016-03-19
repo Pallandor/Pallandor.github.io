@@ -1,22 +1,25 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
 var moment = require('moment');
 var Github = require('github-api');
 
 var table = {
     localPostsTotal: null,
     render: function tableRenderer() {
-        var blog, that = this;
-        $.get('/database.json', function(data) {
+        var blog,
+            that = this;
+        $.get('/database.json', function (data) {
             blog = typeof data === 'string' ? JSON.parse(data) : data;
 
-            // if table has rendered before, only render new posts. 
+            // if table has rendered before, only render new posts.
             if (that.localPostsTotal) {
                 blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal); // will need to change if rendering earliest to oldest or...
             }
 
             // Minimise DOM ops
             var str = '';
-            blog.blogPosts.forEach(function(post) {
+            blog.blogPosts.forEach(function (post) {
                 str += 'tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             });
             $('.blog-table').append(str);
@@ -24,7 +27,7 @@ var table = {
             that.localPostsTotal = blog.totalBlogPosts;
         });
     },
-    add: function(formContent) {
+    add: function add(formContent) {
         var github = new Github({
             token: formContent.token,
             auth: 'oauth'
@@ -38,7 +41,7 @@ var table = {
             encode: true
         };
 
-        repo.read('master', 'database.json', function(err, existingBlog) {
+        repo.read('master', 'database.json', function (err, existingBlog) {
             if (err) throw err;
 
             existingBlog.blogPosts.push({
@@ -52,11 +55,11 @@ var table = {
             existingBlog.nextBlogNumber++;
             existingBlog = JSON.stringify(existingBlog);
 
-            repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
+            repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function (err) {
                 if (err) throw err;
                 alert('repo write to database.json was successful!');
                 $('.submit-button').html(states.btn.submit.normal);
-                $('.form').show(); 
+                $('.form').show();
             });
         });
 
@@ -66,16 +69,16 @@ var table = {
         // }
         // $('form').hide();
         // $('.result-container').show();
-        $('.form-group').hide(); 
-        // $('.submit-button').html(states.btn.submit.normal); 
+        $('.form-group').hide();
+        // $('.submit-button').html(states.btn.submit.normal);
     }
 
 };
 
-$(function() {
+$(function () {
 
     // Start polling for updates
-    var pollDatabase = function() {
+    var pollDatabase = function pollDatabase() {
         table.render();
         setTimeout(pollDatabase, 5000);
     };
@@ -86,26 +89,27 @@ $(function() {
 
     $('.show-form').data(v);
 
-    $('.show-form').on('click', function() {
+    $('.show-form').on('click', function () {
         var page = $('.show-form').data();
 
-        if (page.data === 'on-viewing-page') { // i.e. going-to-submit-page
+        if (page.data === 'on-viewing-page') {
+            // i.e. going-to-submit-page
             $('table').hide();
-            $('form')[0].reset(); //grab 1st dom element. 
+            $('form')[0].reset(); //grab 1st dom element.
             $('form').show();
-            $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why? 
+            $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why?
             $('.show-form').data(s);
-        } else { //i.e. going-to-viewing-page
+        } else {
+            //i.e. going-to-viewing-page
             $('form').hide();
-            $('.result-container').hide(); // don't toggle. make explicit shows/hides. 
+            $('.result-container').hide(); // don't toggle. make explicit shows/hides.
             $('table').show();
             $('.show-form').text(v.text);
             $('.show-form').data(v);
         }
-
     });
 
-    // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
+    // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states.
     var states = {
         btn: {
             submit: {
@@ -113,9 +117,9 @@ $(function() {
                 loading: '<i class="fa fa-refresh fa-spin"></i> Processing Request'
             }
         }
-    }; 
+    };
 
-    $('form').on('submit', function(event) {
+    $('form').on('submit', function (event) {
         $('.submit-button').html(states.btn.submit.loading);
 
         event.preventDefault();
