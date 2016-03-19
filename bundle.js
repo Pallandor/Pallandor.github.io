@@ -19,7 +19,7 @@ var table = {
             // Minimise DOM ops
             var str = '';
             blog.blogPosts.forEach(function (post) {
-                str += "<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>'";
+                str += 'tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             });
             $('.blog-table-body').append(str);
 
