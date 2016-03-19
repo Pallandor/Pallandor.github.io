@@ -16,7 +16,7 @@ var table = {
             // Minimise DOM ops
             var str = '';
             blog.blogPosts.forEach(function(post) {
-                str += 'tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
+                str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             });
             console.log('after all that foreach looping, the str is..'); 
             console.log(str); 
