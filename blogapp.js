@@ -73,7 +73,7 @@ var table = {
                 if (err) throw err;
                 alert('repo write to database.json was successful!');
                 $('.submit-button').html(states.btn.submit.normal);
-                $('.form')[0].reset();
+                $('form')[0].reset();
                 $('.form-group').show();
             });
         });
