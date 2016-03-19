@@ -1,5 +1,6 @@
 var moment = require('moment');
 var Github = require('github-api');
+console.log('still testing form clear'); 
 
 // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
 var states = {
@@ -72,8 +73,9 @@ var table = {
                 if (err) throw err;
                 alert('repo write to database.json was successful!');
                 $('.submit-button').html(states.btn.submit.normal);
-                $('.form-group')[0].reset().show();
-                //$('.form-group')[0].show(); // need to specifically identify the hidden thing to show, doesnt work by showing the
+                $('.form-group')[0].reset();
+
+                $('.form-group')[0].show(); // need to specifically identify the hidden thing to show, doesnt work by showing the
                 // parent element. 
             });
         });
