@@ -73,7 +73,8 @@ var table = {
                 if (err) throw err;
                 alert('repo write to database.json was successful!');
                 $('.submit-button').html(states.btn.submit.normal);
-                $('.form-group').show(); // need to specifically identify the hidden thing to show, doesnt work by showing the
+                $('.form-group')[0].reset().show();
+                //$('.form-group')[0].show(); // need to specifically identify the hidden thing to show, doesnt work by showing the
                 // parent element. 
             });
         });
