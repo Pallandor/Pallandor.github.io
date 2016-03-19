@@ -53,15 +53,19 @@ var table = {
             repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) throw err;
                 alert('repo write to database.json was successful!');
+                $('.submit-button').html(states.btn.submit.normal);
+                $('.form').show(); 
             });
         });
 
-        var res = $('.result-container').html();
-        if (!res.length) {
-            $('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
-        }
-        $('form').hide();
-        $('.result-container').show();
+        // var res = $('.result-container').html();
+        // if (!res.length) {
+        //     $('.result-container').html('<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>');
+        // }
+        // $('form').hide();
+        // $('.result-container').show();
+        $('.form-group').hide(); 
+        // $('.submit-button').html(states.btn.submit.normal); 
     }
 
 };
@@ -99,26 +103,27 @@ $(function() {
 
     });
 
+    // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
+    var states = {
+        btn: {
+            submit: {
+                normal: 'Submit Post',
+                loading: '<i class="fa fa-refresh fa-spin"></i> Processing Request'
+            }
+        }
+    }; 
+
     $('form').on('submit', function(event) {
-
-        // // ONEWAY
-        // $('.submit-button').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...'); 
-
-        // SECOND WAY
-        var $this = $(this);
-        $this.button('loading');
-        setTimeout(function() {
-            $this.button('reset');
-        }, 8000);
+        $('.submit-button').html(states.btn.submit.loading);
 
         event.preventDefault();
 
-        // var formContent = {
-        //     title: $('#input-title').val(),
-        //     post: $('#input-blog').val(),
-        //     token: $('#input-token').val()
-        // };
+        var formContent = {
+            title: $('#input-title').val(),
+            post: $('#input-blog').val(),
+            token: $('#input-token').val()
+        };
 
-        // table.add(formContent);
+        table.add(formContent);
     });
 });
