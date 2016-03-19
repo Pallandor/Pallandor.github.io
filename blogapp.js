@@ -8,8 +8,9 @@ var table = {
         $.get('/database.json', function(data) {
             blog = typeof data === 'string' ? JSON.parse(data) : data;
 
+            // if table has rendered before, only render new posts. 
             if (that.localPostsTotal) {
-                blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal);
+                blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal); // will need to change if rendering earliest to oldest or...
             }
 
             // Minimise DOM ops
@@ -17,7 +18,7 @@ var table = {
             blog.blogPosts.forEach(function(post) {
                 str += 'tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             });
-            $('.blog-table-body').append(str);
+            $('.blog-table').append(str);
 
             that.localPostsTotal = blog.totalBlogPosts;
         });
