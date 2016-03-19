@@ -31,12 +31,11 @@ var table = {
             // });
 
             //Attempting to render table earliest to oldest
-            for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
-                // SECOND TIME, I NEED A GODDAMN LINTER. 
+            for (var i = 0; i < blog.blogPosts.length; i++) {
                 var post = blog.blogPosts[i];
                 str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             }
-            $('.blog-table').append(str);
+            $('.blog-table').prepend(str);
 
             that.localPostsTotal = blog.totalBlogPosts;
         });
