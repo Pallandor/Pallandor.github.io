@@ -32,6 +32,30 @@
     .result-container {
         display: none;
     }
+    /* ONEWAY Stuff for animation testing*/
+    /*  
+    .glyphicon-refresh-animate {
+        -animation: spin .7s infinite linear;
+        -webkit-animation: spin2 .7s infinite linear;
+    }
+    
+    @-webkit-keyframes spin2 {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    
+    @keyframes spin {
+        from {
+            transform: scale(1) rotate(0deg);
+        }
+        to {
+            transform: scale(1) rotate(360deg);
+        }
+    }*/
     </style>
     <h3>Pallandor's Blog</h3>
     <form>
@@ -49,7 +73,7 @@
             <input type="password" class="form-control" id='input-token' placeholder="OAuth Token">
         </div>
         <div>
-            <button type="submit" class="btn btn-default submit-button">Submit Post</button>
+            <button type="submit" class="btn btn-default submit-button" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Request">Submit Post</button>
         </div>
     </form>
     <div class='result-container'></div>
@@ -76,6 +100,7 @@
 <script src='node_modules/moment/moment.js'></script>
 <script src='blogapp.js'></script> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- // Used to be here -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!-- // NEW Browserify based build src script:  -->

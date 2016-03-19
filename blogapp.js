@@ -127,15 +127,26 @@ $(function() {
     });
 
     $('form').on('submit', function(event) {
+
+        // // ONEWAY
+        // $('.submit-button').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...'); 
+
+        // SECOND WAY
+        var $this = $(this);
+        $this.button('loading');
+        setTimeout(function() {
+            $this.button('reset');
+        }, 8000);
+
         event.preventDefault();
 
-        var formContent = {
-            title: $('#input-title').val(),
-            post: $('#input-blog').val(),
-            token: $('#input-token').val()
-        };
+        // var formContent = {
+        //     title: $('#input-title').val(),
+        //     post: $('#input-blog').val(),
+        //     token: $('#input-token').val()
+        // };
 
-        table.add(formContent);
+        // table.add(formContent);
     });
 
 });
