@@ -15,11 +15,16 @@ var table = {
 
             // Minimise DOM ops
             var str = '';
-            blog.blogPosts.forEach(function(post) {
+            // blog.blogPosts.forEach(function(post) {
+            //     str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
+            // });
+
+            //Attempting to render table earliest to oldest
+            for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
+                // SECOND TIME, I NEED A GODDAMN LINTER. 
+                var post = blog.blogPosts[i];
                 str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
-            });
-            console.log('after all that foreach looping, the str is..'); 
-            console.log(str); 
+            }
             $('.blog-table').append(str);
 
             that.localPostsTotal = blog.totalBlogPosts;
@@ -57,7 +62,7 @@ var table = {
                 if (err) throw err;
                 alert('repo write to database.json was successful!');
                 $('.submit-button').html(states.btn.submit.normal);
-                $('.form').show(); 
+                $('.form').show();
             });
         });
 
@@ -67,7 +72,7 @@ var table = {
         // }
         // $('form').hide();
         // $('.result-container').show();
-        $('.form-group').hide(); 
+        $('.form-group').hide();
         // $('.submit-button').html(states.btn.submit.normal); 
     }
 
@@ -114,7 +119,7 @@ $(function() {
                 loading: '<i class="fa fa-refresh fa-spin"></i> Processing Request'
             }
         }
-    }; 
+    };
 
     $('form').on('submit', function(event) {
         $('.submit-button').html(states.btn.submit.loading);
