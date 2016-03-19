@@ -1,6 +1,6 @@
 var moment = require('moment');
 var Github = require('github-api');
-console.log('resetting whole form, showing form group which was the hidden bit'); 
+console.log('resetting whole form, showing form group which was the hidden bit');
 
 // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
 var states = {
@@ -31,10 +31,13 @@ var table = {
             // });
 
             //Attempting to render table earliest to oldest
-            for (var i = 0; i < blog.blogPosts.length; i++) {
+            for (var i = blog.blogPosts.length-1; i >= 0; i--) {
                 var post = blog.blogPosts[i];
                 str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             }
+
+            // [p1, p2, p3]     START    p3p2p1   prepend
+            // [p1, p2, p3, p4, p5]     p5p4    prepend
             $('.blog-table').prepend(str);
 
             that.localPostsTotal = blog.totalBlogPosts;

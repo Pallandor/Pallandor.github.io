@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var moment = require('moment');
 var Github = require('github-api');
-console.log('resetting whole form, showing form group which was the hidden bit'); 
+console.log('resetting whole form, showing form group which was the hidden bit');
 
 // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
 var states = {
@@ -32,10 +32,13 @@ var table = {
             // });
 
             //Attempting to render table earliest to oldest
-            for (var i = 0; i < blog.blogPosts.length; i++) {
+            for (var i = blog.blogPosts.length-1; i >= 0; i--) {
                 var post = blog.blogPosts[i];
                 str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             }
+
+            // [p1, p2, p3]     START    p3p2p1   prepend
+            // [p1, p2, p3, p4, p5]     p5p4    prepend
             $('.blog-table').prepend(str);
 
             that.localPostsTotal = blog.totalBlogPosts;
