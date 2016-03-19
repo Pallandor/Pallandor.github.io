@@ -18,6 +18,8 @@ var table = {
             blog.blogPosts.forEach(function(post) {
                 str += 'tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
             });
+            console.log('after all that foreach looping, the str is..'); 
+            console.log(str); 
             $('.blog-table').append(str);
 
             that.localPostsTotal = blog.totalBlogPosts;
