@@ -2,6 +2,16 @@
 var moment = require('moment');
 var Github = require('github-api');
 
+// for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
+var states = {
+    btn: {
+        submit: {
+            normal: 'Submit Post',
+            loading: '<i class="fa fa-refresh fa-spin"></i> Processing Request'
+        }
+    }
+};
+
 var table = {
     localPostsTotal: null,
     render: function tableRenderer() {
@@ -111,16 +121,6 @@ $(function() {
         }
 
     });
-
-    // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
-    var states = {
-        btn: {
-            submit: {
-                normal: 'Submit Post',
-                loading: '<i class="fa fa-refresh fa-spin"></i> Processing Request'
-            }
-        }
-    };
 
     $('form').on('submit', function(event) {
         $('.submit-button').html(states.btn.submit.loading);
