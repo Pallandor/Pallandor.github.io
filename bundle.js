@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var moment = require('moment');
 var Github = require('github-api');
-console.log('now testing polling not rendering after submissions');
+console.log('repo read error handling and button states');
 
 // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
 var states = {
@@ -17,7 +17,8 @@ var states = {
             },
             onForm: {
                 text: 'Back to Blog Posts'
-            }
+            },
+            currentLocation: 'onBlog'
         }
     },
     alert: {
@@ -121,27 +122,41 @@ $(function() {
     };
     pollDatabase();
 
-    var s = { text: 'Back to Blog Posts', data: 'on-submit-page' },
-        v = { text: 'Add Blog Post', data: 'on-viewing-page' };
+    // var s = { text: 'Back to Blog Posts', data: 'on-submit-page' },
+    //     v = { text: 'Add Blog Post', data: 'on-viewing-page' };
 
-    $('.show-form').data(v);
+    // //default state is onBlog
+    // $('.show-form').data(states.btn.addBack.);
 
     $('.show-form').on('click', function() {
-        var page = $('.show-form').data();
-
-        if (page.data === 'on-viewing-page') { // i.e. going to submit-page
+        if (states.btn.addBack.currentLocation === 'onBlog') { // i.e. going to Form page
             $('table').hide();
             $('form')[0].reset(); //grab 1st dom element. 
             $('form').show();
-            $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why? 
-            $('.show-form').data(s);
-        } else { //i.e. going to viewing-page
+            $('.show-form').text(states.btn.addBack.onForm.text); 
+            states.btn.addBack.currentLocation === 'onForm';
+        } else {  // otherwise if going to Blog page
             $('form').hide();
-            $('.result-container').hide(); // don't toggle. make explicit shows/hides. 
+            $('.result-container').hide();
             $('table').show();
-            $('.show-form').text(v.text);
-            $('.show-form').data(v);
+            $('.show-form').text(states.btn.addBack.onBlog.text); 
+            states.btn.addBack.currentLocation === 'onBlog';
         }
+        // var page = $('.show-form').data();
+
+        // if (page.data === 'on-viewing-page') { // i.e. going to submit-page
+        //     $('table').hide();
+        //     $('form')[0].reset(); //grab 1st dom element. 
+        //     $('form').show();
+        //     $('.show-form').text(s.text); // Someone mentioned not to use .text due to mem leaks? Why? 
+        //     $('.show-form').data(s);
+        // } else { //i.e. going to viewing-page
+        //     $('form').hide();
+        //     $('.result-container').hide(); // don't toggle. make explicit shows/hides. 
+        //     $('table').show();
+        //     $('.show-form').text(v.text);
+        //     $('.show-form').data(v);
+        // }
 
     });
 
