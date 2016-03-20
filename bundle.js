@@ -95,7 +95,12 @@ var table = {
             repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) {
                     console.log('a write repo err');
-                    // don't think it ever gets to hear if there's a repo read failure..
+                    // write repo errors when there's no ouath token passed at all, it seems.
+                    $('.result-container').html(states.alert.fail);
+                    $('.result-container').show();
+                    // also return them back to the form, but not reset. 
+                    $('.submit-button').html(states.btn.submit.normal);
+                    $('.form-group').show();
                     throw err;
                 }
                 // change to modals once this works. 
@@ -133,13 +138,13 @@ $(function() {
             $('table').hide();
             $('form')[0].reset(); //grab 1st dom element. 
             $('form').show();
-            $('.show-form').text(states.btn.addBack.onForm.text); 
+            $('.show-form').text(states.btn.addBack.onForm.text);
             states.btn.addBack.currentLocation = 'onForm';
-        } else {  // otherwise if going to Blog page
+        } else { // otherwise if going to Blog page
             $('form').hide();
             $('.result-container').hide();
             $('table').show();
-            $('.show-form').text(states.btn.addBack.onBlog.text); 
+            $('.show-form').text(states.btn.addBack.onBlog.text);
             states.btn.addBack.currentLocation = 'onBlog';
         }
         // var page = $('.show-form').data();
