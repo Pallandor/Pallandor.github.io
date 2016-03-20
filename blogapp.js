@@ -37,55 +37,19 @@ var table = {
                 cache: false
             })
             .done(function(blog) {
-                //blog = typeof data === 'string' ? JSON.parse(data) : data;
-
                 // if table has rendered before, only render new posts. 
                 that.localPostsTotal && (blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal));
 
-                // Minimise DOM ops while rendering by composing new changes to str rather than changing DOM per new post 
+                // Minimise DOM ops while rendering by composing new posts to str rather than changing DOM per new post 
                 var str = '';
-
                 //Render table earliest to oldest
                 for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
                     var post = blog.blogPosts[i];
                     str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
                 }
-
-                // Visualising render ops
-                // [p1, p2, p3]     START    p3p2p1   prepend
-                // [p1, p2, p3, p4, p5]     p5p4    prepend
                 $('.blog-table').prepend(str);
-
                 that.localPostsTotal = blog.totalBlogPosts;
             })
-            .fail(function(err) {
-                alert('there was an err with the ajax req, throwing err now');
-                throw err;
-            })
-
-        // // REPLACING in order to enable ajax requests that won't retrieve CACHED json results... 
-        // $.get('/database.json', function(data) {
-        //     blog = typeof data === 'string' ? JSON.parse(data) : data;
-
-        //     // if table has rendered before, only render new posts. 
-        //     that.localPostsTotal && (blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal));
-
-        //     // Minimise DOM ops while rendering by composing new changes to str rather than changing DOM per new post 
-        //     var str = '';
-
-        //     //Render table earliest to oldest
-        //     for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
-        //         var post = blog.blogPosts[i];
-        //         str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
-        //     }
-
-        //     // Visualising render ops
-        //     // [p1, p2, p3]     START    p3p2p1   prepend
-        //     // [p1, p2, p3, p4, p5]     p5p4    prepend
-        //     $('.blog-table').prepend(str);
-
-        //     that.localPostsTotal = blog.totalBlogPosts;
-        // });
 
     },
     add: function(formContent) {
@@ -105,7 +69,13 @@ var table = {
 
         repo.read('master', 'database.json', function(err, existingBlog) {
             if (err) {
-                console.log('a read repo errro');
+                console.log('a read repo error');
+                // prob need to show result container.
+                $('.result-container').html(states.alert.fail);
+                $('.result-container').show();
+                // also return them back to the form, but not reset. 
+                $('.submit-button').html(states.btn.submit.normal);
+                $('.form-group').show();
                 throw err;
             }
 
@@ -123,7 +93,7 @@ var table = {
             repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) {
                     console.log('a write repo err');
-                    $('.result-container').html(states.alert.fail);
+                    // don't think it ever gets to hear if there's a repo read failure..
                     throw err;
                 }
                 // change to modals once this works. 
@@ -144,7 +114,7 @@ $(function() {
 
     // Start polling for updates
     var pollDatabase = function() {
-        alert('polling db..');
+        console.log('Polling database.json for new posts...');
         table.render();
         setTimeout(pollDatabase, 5000);
     };
