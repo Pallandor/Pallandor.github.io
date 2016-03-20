@@ -3,7 +3,7 @@ var moment = require('moment');
 var Github = require('github-api');
 console.log('repo read error handling and button states');
 
-// for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
+// for managing submit btn states
 var states = {
     btn: {
         submit: {
@@ -13,7 +13,6 @@ var states = {
         addBack: {
             onBlog: {
                 text: 'Add Blog Post',
-                //currentLocation: 
             },
             onForm: {
                 text: 'Back to Blog Posts'
@@ -32,7 +31,7 @@ var table = {
     render: function tableRenderer() {
         var blog, that = this;
 
-        // this is serving back a cached database.json, modify to full $.ajax request to set cache to false. 
+        // this was serving back a cached database.json, modify to full $.ajax request to set cache to false. 
         $.ajax({
                 url: '/database.json',
                 dataType: 'json',
@@ -47,6 +46,9 @@ var table = {
                 //Render table earliest to oldest
                 for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
                     var post = blog.blogPosts[i];
+                    // transform all newline chars in the post into <br> tags to preserve paragraphing when appending to HTML. 
+                    post.content = post.content.replace(/\n/g, '<br>');
+                    // add post data to composed str
                     str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
                 }
                 $('.blog-table').prepend(str);
