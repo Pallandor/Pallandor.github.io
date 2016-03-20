@@ -23,7 +23,7 @@ var states = {
     },
     alert: {
         success: '<div class="alert alert-success" role="alert">You have successfully submitted your blog post!</div>',
-        fail: '<div class="alert alert-warning" role="alert">Oops! Something went wrong, you should try again!/div>'
+        fail: '<div class="alert alert-warning" role="alert">Oops! Something went wrong, you should try again!</div>'
     }
 };
 
