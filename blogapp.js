@@ -133,13 +133,13 @@ $(function() {
             $('form')[0].reset(); //grab 1st dom element. 
             $('form').show();
             $('.show-form').text(states.btn.addBack.onForm.text); 
-            states.btn.addBack.currentLocation === 'onForm';
+            states.btn.addBack.currentLocation = 'onForm';
         } else {  // otherwise if going to Blog page
             $('form').hide();
             $('.result-container').hide();
             $('table').show();
             $('.show-form').text(states.btn.addBack.onBlog.text); 
-            states.btn.addBack.currentLocation === 'onBlog';
+            states.btn.addBack.currentLocation = 'onBlog';
         }
         // var page = $('.show-form').data();
 
