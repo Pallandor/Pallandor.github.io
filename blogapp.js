@@ -1,6 +1,6 @@
 var moment = require('moment');
 var Github = require('github-api');
-console.log('now testing alert, but also extending btn states but not displaying');
+console.log('now testing polling not rendering after submissions');
 
 // for managing submit btn states, EXTEND THIS LATER for managing state of the add blog post, back to blog posts btn states. 
 var states = {
@@ -30,31 +30,63 @@ var table = {
     render: function tableRenderer() {
         var blog, that = this;
 
-        $.get('/database.json', function(data) {
-            blog = typeof data === 'string' ? JSON.parse(data) : data;
+        // this is serving back a cached database.json, modify to full $.ajax request to set cache to false. 
+        $.ajax({
+                url: '/database.json',
+                dataType: 'json',
+                cache: false
+            })
+            .done(function(blog) {
+                //blog = typeof data === 'string' ? JSON.parse(data) : data;
 
-            // if table has rendered before, only render new posts. 
-            that.localPostsTotal && (blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal));
+                // if table has rendered before, only render new posts. 
+                that.localPostsTotal && (blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal));
 
-            // Minimise DOM ops while rendering by composing new changes to str rather than changing DOM per new post 
-            var str = '';
-            // blog.blogPosts.forEach(function(post) {
-            //     str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
-            // });
+                // Minimise DOM ops while rendering by composing new changes to str rather than changing DOM per new post 
+                var str = '';
 
-            //Render table earliest to oldest
-            for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
-                var post = blog.blogPosts[i];
-                str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
-            }
+                //Render table earliest to oldest
+                for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
+                    var post = blog.blogPosts[i];
+                    str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
+                }
 
-            // Visualising render ops
-            // [p1, p2, p3]     START    p3p2p1   prepend
-            // [p1, p2, p3, p4, p5]     p5p4    prepend
-            $('.blog-table').prepend(str);
+                // Visualising render ops
+                // [p1, p2, p3]     START    p3p2p1   prepend
+                // [p1, p2, p3, p4, p5]     p5p4    prepend
+                $('.blog-table').prepend(str);
 
-            that.localPostsTotal = blog.totalBlogPosts;
-        });
+                that.localPostsTotal = blog.totalBlogPosts;
+            })
+            .fail(function(err) {
+                alert('there was an err with the ajax req, throwing err now');
+                throw err;
+            })
+
+        // // REPLACING in order to enable ajax requests that won't retrieve CACHED json results... 
+        // $.get('/database.json', function(data) {
+        //     blog = typeof data === 'string' ? JSON.parse(data) : data;
+
+        //     // if table has rendered before, only render new posts. 
+        //     that.localPostsTotal && (blog.blogPosts = blog.blogPosts.slice(that.localPostsTotal));
+
+        //     // Minimise DOM ops while rendering by composing new changes to str rather than changing DOM per new post 
+        //     var str = '';
+
+        //     //Render table earliest to oldest
+        //     for (var i = blog.blogPosts.length - 1; i >= 0; i--) {
+        //         var post = blog.blogPosts[i];
+        //         str += '<tr><th>' + post.number + '</th><td>' + post.date + '</td><td>' + post.content + '</td></tr>';
+        //     }
+
+        //     // Visualising render ops
+        //     // [p1, p2, p3]     START    p3p2p1   prepend
+        //     // [p1, p2, p3, p4, p5]     p5p4    prepend
+        //     $('.blog-table').prepend(str);
+
+        //     that.localPostsTotal = blog.totalBlogPosts;
+        // });
+
     },
     add: function(formContent) {
 
@@ -74,7 +106,7 @@ var table = {
         repo.read('master', 'database.json', function(err, existingBlog) {
             if (err) {
                 console.log('a read repo errro');
-                throw err; 
+                throw err;
             }
 
             existingBlog.blogPosts.push({
@@ -90,7 +122,7 @@ var table = {
 
             repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) {
-                    console.log('a write repo err'); 
+                    console.log('a write repo err');
                     $('.result-container').html(states.alert.fail);
                     throw err;
                 }
@@ -112,6 +144,7 @@ $(function() {
 
     // Start polling for updates
     var pollDatabase = function() {
+        alert('polling db..');
         table.render();
         setTimeout(pollDatabase, 5000);
     };
@@ -143,7 +176,7 @@ $(function() {
 
     $('form').on('submit', function(event) {
         $('.form-group').hide();
-        $('.result-container').html(''); 
+        $('.result-container').html('');
         $('.submit-button').html(states.btn.submit.loading);
 
         event.preventDefault();
