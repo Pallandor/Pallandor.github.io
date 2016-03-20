@@ -72,7 +72,10 @@ var table = {
         };
 
         repo.read('master', 'database.json', function(err, existingBlog) {
-            if (err) throw err;
+            if (err) {
+                console.log('a read repo errro');
+                throw err; 
+            }
 
             existingBlog.blogPosts.push({
                 number: existingBlog.nextBlogNumber,
@@ -87,6 +90,7 @@ var table = {
 
             repo.write('master', 'database.json', existingBlog, 'Adding new blog post', options, function(err) {
                 if (err) {
+                    console.log('a write repo err'); 
                     $('.result-container').html(states.alert.fail);
                     throw err;
                 }
@@ -139,6 +143,7 @@ $(function() {
 
     $('form').on('submit', function(event) {
         $('.form-group').hide();
+        $('.result-container').html(''); 
         $('.submit-button').html(states.btn.submit.loading);
 
         event.preventDefault();
