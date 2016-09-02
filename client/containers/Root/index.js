@@ -1,10 +1,21 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+// import { Router, browserHistory } from 'react-router';
+// import { syncHistoryWithStore } from 'react-router-redux';
 
-// inject store via provider
+import routes from '../../routes';
+import configureStore from '../../store/configureStore';
+
+const store = configureStore({'beginning': 'lololol'});
+// const history = syncHistoryWithStore(browserHistory, store);
+
 const Root = () => (
-  <div>
-    This is the root component which is being read from components
-  </div>
-  );
+  <Provider store={ store }>
+    <Router>
+      {routes}
+    </Router>
+  </Provider>
+);
 
 export default Root;
