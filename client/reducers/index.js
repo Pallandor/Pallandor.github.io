@@ -1,13 +1,19 @@
 import { combineReducers } from 'redux';
 
-const someReducer = (state, action) => {
+import * as constants from '../constants';
+
+// should change from array to map/obj
+const INITIAL_STATE = []; // of articles
+
+const articlesReducer = (state, action) => {
   switch (action.type) {
-    // add variants here
-    default:
-      return state;
+    case constants.FETCH_ARTICLES_SUCCESS:
+      return [
+      ...state,
+      // working here...
+      ];
   }
 }
-// import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({
   // routing: routerReducer,
