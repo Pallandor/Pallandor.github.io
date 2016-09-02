@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[chunkhash].js',
-    sourceMapFilename: '[name].[chunkhash].js.map',
+    // sourceMapFilename: '[name].[chunkhash].js.map',
   },
 
   devtool: !devmode ? 'source-map' : 'inline-source-map',

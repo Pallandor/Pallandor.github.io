@@ -1,8 +1,8 @@
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
 
 const basePlugins = [
   new webpack.DefinePlugin({
@@ -20,9 +20,10 @@ const basePlugins = [
 ];
 
 const prodPlugins = [
-  new SplitByPathPlugin([
-    { name: 'vendor', path: [path.join(__dirname, '..', 'node_modules/')] },
-  ]),
+  new SplitByPathPlugin([{
+    name: 'vendor',
+    path: path.join(__dirname, 'node_modules/'),
+  }]),
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
     compress: {
@@ -32,7 +33,7 @@ const prodPlugins = [
   }),
 ];
 
-const devPlugins = []; 
+const devPlugins = [];
 
 module.exports = basePlugins
   .concat(process.env.NODE_ENV === 'production' ? prodPlugins : [])
