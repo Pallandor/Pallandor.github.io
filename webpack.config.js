@@ -1,6 +1,8 @@
 const path = require('path');
 const plugins = require('./webpack/plugins');
+const loaders = require('./webpack/loaders');
 
+const devmode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: {
@@ -13,6 +15,15 @@ module.exports = {
     sourceMapFilename: '[name].[chunkhash].js.map',
   },
 
-  plugins: 
+  devtool: !devmode ? 'source-map' : 'inline-source-map',
+
+  plugins: plugins,
+
+  module: {
+    loaders: [
+      // loaders.css,
+      loaders.js,
+    ],
+  }
 
 };
