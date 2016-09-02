@@ -1,8 +1,7 @@
 {
   "name": "pallandor.github.io",
   "version": "0.0.0",
-  "description": "",
-  "main": "blogapp.js",
+  "description": "Another over-engineered blog.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist/",
@@ -19,10 +18,6 @@
     "url": "https://github.com/Pallandor/Pallandor.github.io/issues"
   },
   "homepage": "https://github.com/Pallandor/Pallandor.github.io#readme",
-  "dependencies": {
-    "github-api": "^0.11.2",
-    "moment": "^2.12.0"
-  },
   "devDependencies": {
     "babel-cli": "6.10.1",
     "babel-core": "6.10.4",
