@@ -1,0 +1,3 @@
+* Add external Node server w/mongo, acting as state machine for articles only
+  - feeds via API calls from react SPA
+  - once setup, THEN add { browserHistory } to react-router (though might still not work if needs server to handle serving static assets on route changes?)
