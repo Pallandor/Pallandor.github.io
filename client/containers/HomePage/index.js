@@ -1,22 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-// will inject store later
 import ArticleList from '../../components/ArticleList';
+import Loading from '../../components/Loading';
 
+// query mongo store via API call for articles
 const fakeArticles = [
-  { title: 'Bringer of Doom v2', content: 'It was a long summer day that day, they said...' },
-  { title: 'Harbringer of Life v2', content: 'Something about the whole thing just didn\'t smell right...' },
+  { title: 'Bringer of Doom v4', content: 'It was a long summer day that day, they said...' },
+  { title: 'Harbringer of Life v4', content: 'Something about the whole thing just didn\'t smell right...' },
 ];
 
-const HomePage = () => (
-  <div>
-    freaking homepage ya. 
-    Articles Below: (was this on a new line? see..)
-    <ArticleList articles={fakeArticles} />
-  </div>
-);
+class HomePage extends Component {
+  // natively manage component 'loading/fetch' state
+  constructor() {
+    super();
+    this.state = {
+      loading: true,
+    };
+    this._renderHomePage = this._renderHomePage.bind(this);
+    this._updateLoadingState = this._updateLoadingState.bind(this);
+  }
 
-// grab articles via API from node server/mongo implementation
-// feed to ArticleList
+  componentDidMount() {
+    // mock API call event here
+    window.setTimeout(() => {
+      this._updateLoadingState();
+    }, 3000)
+  }
+
+  _updateLoadingState(){
+    this.setState({
+      loading: !this.state.loading,
+    })
+  }
+
+  _renderHomePage() {
+    return (
+      <div>
+        Welcome to Homepage! Articles Below!
+        <ArticleList articles={fakeArticles} />
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.loading ? <Loading /> : this._renderHomePage()}
+      </div>
+    );
+  }
+};
 
 export default HomePage;
