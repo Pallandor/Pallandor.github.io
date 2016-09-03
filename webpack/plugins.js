@@ -22,7 +22,7 @@ const basePlugins = [
 const prodPlugins = [
   new SplitByPathPlugin([{
     name: 'vendor',
-    path: path.join(__dirname, 'node_modules/'),
+    path: path.join(__dirname, '..', 'node_modules/'),
   }]),
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,

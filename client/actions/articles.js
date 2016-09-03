@@ -11,7 +11,7 @@ export const fetchArticles = () => (dispatch, getState) => {
     .then(articlesArr => {
       dispatch({
         type: constants.FETCH_ARTICLES_SUCCESS,
-        article: articlesArr, 
+        articles: articlesArr, 
       });
     })
     .catch(err => {
