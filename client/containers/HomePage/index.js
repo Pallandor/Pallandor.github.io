@@ -3,9 +3,15 @@ import { connect } from 'redux';
 
 import ArticleList from '../../components/ArticleList';
 import Loading from '../../components/Loading';
+import { getArticles } from '../../reducers/articles';
+import { fetchArticles } from '../'
 
-const mapStoreToProps = state => ({
-  
+const mapStoreToProps = store => ({
+  articles: getArticles(store),
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchArticles: () => dispatch()
 });
 
 class HomePage extends Component {
