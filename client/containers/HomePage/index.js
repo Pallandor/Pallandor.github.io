@@ -22,10 +22,9 @@ class HomePage extends Component {
     this._renderHomePage = this._renderHomePage.bind(this);
   }
 
-  // // will mount or did mount? 
-  // componentDidMount() {
-  //   this.props.fetchArticles();
-  // }
+  componentWillMount(){
+    this.props.fetchArticles();
+  }
 
   _renderHomePage() {
     return (

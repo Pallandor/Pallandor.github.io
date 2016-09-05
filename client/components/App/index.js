@@ -7,10 +7,8 @@ const App = props => (
   <div>
 {/* extract below out as a sep NavBar Component */ }
     <nav>
-      <a href="#"><Link to={'about'}>Go to About Page</Link></a>
-      <a href="/css/">CSS</a>
-      <a href="/js/">JavaScript</a>
-      <a href="/jquery/">jQuery</a>
+      <a href="#"><Link to={'/'}>Home</Link></a>
+      <a href="#"><Link to={'about'}>About</Link></a>
     </nav>
     {props.children} 
   </div>
