@@ -1,10 +1,12 @@
 import React from 'react';
+import * as util from '../../util';
 
 // temporarily, for visualising only
-const Article = props => (
+const Article = ({title, date, content}) => (
   <div>
-    Article Title: {props.title}
-    Article Content: {props.content}
+    <div>Title: {title}</div>
+    <div>Date: {util.convertDateToString(date)}</div>
+    <div>Content: {content}</div>
   </div>
 );
 

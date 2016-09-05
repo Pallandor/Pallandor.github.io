@@ -7,6 +7,7 @@ const ArticleList = props => {
     <Article
       key={ind}
       title={article.title}
+      date={article.date}
       content={article.content}
     />
   ));
