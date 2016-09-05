@@ -1,17 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router';
+
+import NavBar from '../NavBar'
 
 // should props.children be <props.children /> ??
 
-const App = props => (
+const App = ({ children }) => (
   <div>
-{/* extract below out as a sep NavBar Component */ }
-    <nav>
-      <a href="#"><Link to={'/'}>Home</Link></a>
-      <a href="#"><Link to={'about'}>About</Link></a>
-    </nav>
-    {props.children} 
+    <NavBar />
+    {children}
   </div>
 );
+
+App.propTypes = {
+  children: React.PropTypes.node, 
+};
 
 export default App;
