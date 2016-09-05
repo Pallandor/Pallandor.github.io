@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import { connect } from 'redux';
+import { connect } from 'react-redux';
 
 import ArticleList from '../../components/ArticleList';
 import Loading from '../../components/Loading';
 import { getArticles } from '../../reducers/articles';
-import { fetchArticles } from '../'
+import { fetchArticles } from '../../actions/articles';
 
 const mapStoreToProps = store => ({
   articles: getArticles(store),
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchArticles: () => dispatch()
+  fetchArticles: () => dispatch(fetchArticles()),
 });
 
+// maybe abstract out the 'loading' concept to a base component (cool to try!)
+  // or to redux store (as a general page concept?)
 class HomePage extends Component {
   // natively manage component 'loading/fetch' state
   constructor() {
@@ -42,7 +44,8 @@ class HomePage extends Component {
     return (
       <div>
         Welcome to Homepage! Articles Below!
-        <ArticleList articles={fakeArticles} />
+        <button onClick={this.props.fetchArticles}>Get Articles</button>
+        <ArticleList articles={this.props.articles} />
       </div>
     );
   }
@@ -56,4 +59,4 @@ class HomePage extends Component {
   }
 };
 
-export default HomePage;
+export default connect(mapStoreToProps, mapDispatchToProps)(HomePage);

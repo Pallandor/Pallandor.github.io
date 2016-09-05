@@ -2,7 +2,9 @@ import * as api from '../api';
 import * as constants from '../constants';
 
 // thunks
+  // can modify to accept arg e.g. number of latest articles.
 export const fetchArticles = () => (dispatch, getState) => {
+  alert('fetchartciles was cliked yo!');
   dispatch({
     type: constants.FETCH_ARTICLES_PENDING,
   });
