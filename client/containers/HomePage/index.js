@@ -4,41 +4,28 @@ import { connect } from 'react-redux';
 import ArticleList from '../../components/ArticleList';
 import Loading from '../../components/Loading';
 import { getArticles } from '../../reducers/articles';
+import { getArticlesLoadingState } from '../../reducers/ui/articles';
 import { fetchArticles } from '../../actions/articles';
 
 const mapStoreToProps = store => ({
   articles: getArticles(store),
+  isLoadingArticles: getArticlesLoadingState(store),
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchArticles: () => dispatch(fetchArticles()),
 });
 
-// maybe abstract out the 'loading' concept to a base component (cool to try!)
-  // or to redux store (as a general page concept?)
 class HomePage extends Component {
-  // natively manage component 'loading/fetch' state
-  constructor() {
+  constructor(){
     super();
-    this.state = {
-      loading: true,
-    };
     this._renderHomePage = this._renderHomePage.bind(this);
-    this._updateLoadingState = this._updateLoadingState.bind(this);
   }
 
-  componentDidMount() {
-    // mock API call event here
-    window.setTimeout(() => {
-      this._updateLoadingState();
-    }, 3000)
-  }
-
-  _updateLoadingState(){
-    this.setState({
-      loading: !this.state.loading,
-    })
-  }
+  // // will mount or did mount? 
+  // componentDidMount() {
+  //   this.props.fetchArticles();
+  // }
 
   _renderHomePage() {
     return (
@@ -51,11 +38,7 @@ class HomePage extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.state.loading ? <Loading /> : this._renderHomePage()}
-      </div>
-    );
+    return this.props.isLoadingArticles ? <Loading /> : this._renderHomePage();
   }
 };
 

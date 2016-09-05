@@ -9,11 +9,11 @@ const fakeDatabase = {
   }, {
     id: v4(),
     title: 'The Dark Knight',
-    completed: 'Who would have thought that something like this could happen?',
+    content: 'Who would have thought that something like this could happen?',
   }, {
     id: v4(),
     title: 'Sir Gaben Rises',
-    completed: 'Dondo and Miracle, otherwise known as Merkel, made decisive blows against Sufail...',
+    content: 'Dondo and Miracle, otherwise known as Merkel, made decisive blows against Sufail...',
   }],
 };
 
