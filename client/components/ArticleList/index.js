@@ -1,11 +1,13 @@
 import React from 'react';
 
-import Article from '../Article';
+import ArticleExcerpt from '../ArticleExcerpt';
 
+// TODO: generate titleRouteLink dynamically for client side routing
 const ArticleList = props => {
-  const renderArticles = articlesArr => articlesArr.map((article, ind) => (
-    <Article
+  const renderArticleExcerpts = articlesArr => articlesArr.map((article, ind) => (
+    <ArticleExcerpt
       key={ind}
+      titleRouteLink={'about'}
       title={article.title}
       date={article.date}
       content={article.content}
@@ -14,7 +16,7 @@ const ArticleList = props => {
 
   return (
     <div>
-      {renderArticles(props.articles)}
+      {renderArticleExcerpts(props.articles)}
     </div>
   );
 };

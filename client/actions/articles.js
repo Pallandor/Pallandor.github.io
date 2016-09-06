@@ -8,11 +8,12 @@ export const fetchArticles = () => (dispatch, getState) => {
     type: constants.FETCH_ARTICLES_PENDING,
   });
 
-  api.fetchArticles()
+//  api.fetchArticles()
+  api.fetchArticleExcerpts()
     .then(articlesArr => {
       dispatch({
         type: constants.FETCH_ARTICLES_SUCCESS,
-        articles: articlesArr, 
+        articles: articlesArr,
       });
     })
     .catch(err => {
