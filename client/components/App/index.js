@@ -2,8 +2,6 @@ import React from 'react';
 
 import NavBar from '../NavBar'
 
-// should props.children be <props.children /> ??
-
 const App = ({ children }) => (
   <div>
     <NavBar />

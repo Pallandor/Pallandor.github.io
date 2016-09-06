@@ -11,7 +11,7 @@ const Article = ({title, date, content}) => (
       <time className={styles.headerDate}>{util.convertDateToString(date)}</time>
     </header>
     <div className={styles.bodyContainer}>
-      <p className={styles.paragraph}>{content}</p> // see if needs another p?
+      <p className={styles.paragraph}>{content}</p>
     </div>
   </article>
 );
