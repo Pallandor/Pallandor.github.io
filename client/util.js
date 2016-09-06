@@ -3,4 +3,3 @@ exports.convertDateToString = dateObj => {
   const dd = dateObj.getDate();
   return [dateObj.getFullYear(), !mm[1] && '0', mm, !dd[1] && '0', dd].join(''); // padding
 };
-
