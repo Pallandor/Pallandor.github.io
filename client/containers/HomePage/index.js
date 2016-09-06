@@ -29,8 +29,6 @@ class HomePage extends Component {
   _renderHomePage() {
     return (
       <div>
-        Welcome to Homepage! Articles Below!
-        <button onClick={this.props.fetchArticles}>Get Articles</button>
         <ArticleList articles={this.props.articles} />
       </div>
     );
