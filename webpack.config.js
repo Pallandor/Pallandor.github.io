@@ -23,6 +23,7 @@ module.exports = {
     loaders: [
       // loaders.css,
       loaders.js,
+      loaders.json,
     ],
   }
 
