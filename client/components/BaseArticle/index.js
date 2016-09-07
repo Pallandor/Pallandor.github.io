@@ -6,7 +6,7 @@ import * as util from '../../util';
 
 const BaseArticle = ({titleRouteLink, title, date, content, children}) => {
   const renderTitle = () =>
-    titleRouteLink ? <Link to={titleRouteLink}>{title}</Link> : title;
+    titleRouteLink ? <Link className={styles.link} to={titleRouteLink}>{title}</Link> : title;
   const propsToInject = {
     content,
     // add aditional props here (e.g. styles), but note native DOM nodes will
@@ -31,6 +31,7 @@ const styles = {
   bodyContainer: 'fn fl-ns w-50-ns',
   paragraph: 'lh-copy measure mt4 mt0-ns',
   lastParagraph: 'lh-copy measure',
+  link: 'link dim dark-gray',
 };
 
 

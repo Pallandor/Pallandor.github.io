@@ -6,10 +6,8 @@ import CustomReactMarkdown from '../CustomReactMarkdown';
 
 // CustomReactMarkdown gets injected with content props
 const ArticleExcerpt = ({articleLink, title, date, content}) => {
-
   // TODO: Fix babel config to support template literal strings
-  const getSnippet = content => content.slice(0,150) + '...';
-
+  const getSnippet = content => content.slice(0,180) + '...';
   return (
     <BaseArticle
       titleRouteLink={articleLink}
@@ -18,10 +16,14 @@ const ArticleExcerpt = ({articleLink, title, date, content}) => {
       content={getSnippet(content)}
     >
       <CustomReactMarkdown />
-      <Link to={articleLink}>Read more...</Link>
+      <Link className={styles.link} to={articleLink}>Read more</Link>
     </BaseArticle>
   );
 };
+
+const styles = {
+  link: 'f6 link dim dark-gray',
+}
 
 ArticleExcerpt.propTypes = {
   titleRouteLink: React.PropTypes.string,
