@@ -17,7 +17,6 @@ const ArticleExcerpt = ({articleLink, title, date, content}) => {
     >
       <div className={styles.bodyContainer}>
         <CustomReactMarkdown
-          className={styles.paragraph}
           content={getSnippet(content)}
         />
         <Link className={styles.link} to={articleLink}>Read more</Link>
@@ -29,7 +28,6 @@ const ArticleExcerpt = ({articleLink, title, date, content}) => {
 const styles = {
   link: 'f6 link dim dark-gray',
   bodyContainer: 'fn fl-ns w-50-ns',
-  // paragraph: 'lh-copy measure mt4 mt0-ns',
 }
 
 ArticleExcerpt.propTypes = {
