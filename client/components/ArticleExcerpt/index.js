@@ -7,22 +7,29 @@ import CustomReactMarkdown from '../CustomReactMarkdown';
 // CustomReactMarkdown gets injected with content props
 const ArticleExcerpt = ({articleLink, title, date, content}) => {
   // TODO: Fix babel config to support template literal strings
-  const getSnippet = content => content.slice(0,180) + '...';
+  // TODO: Fix getSnippet, naive string splicer may split markdown
+  const getSnippet = content => content.slice(0,450) + '...';
   return (
     <BaseArticle
       titleRouteLink={articleLink}
       title={title}
       date={date}
-      content={getSnippet(content)}
     >
-      <CustomReactMarkdown />
-      <Link className={styles.link} to={articleLink}>Read more</Link>
+      <div className={styles.bodyContainer}>
+        <CustomReactMarkdown
+          className={styles.paragraph}
+          content={getSnippet(content)}
+        />
+        <Link className={styles.link} to={articleLink}>Read more</Link>
+      </div>
     </BaseArticle>
   );
 };
 
 const styles = {
   link: 'f6 link dim dark-gray',
+  bodyContainer: 'fn fl-ns w-50-ns',
+  // paragraph: 'lh-copy measure mt4 mt0-ns',
 }
 
 ArticleExcerpt.propTypes = {
