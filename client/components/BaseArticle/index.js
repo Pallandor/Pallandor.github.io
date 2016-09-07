@@ -4,17 +4,21 @@ import { Link } from 'react-router';
 
 import * as util from '../../util';
 
-// TODO: Add childen to props validation
 const BaseArticle = ({titleRouteLink, title, date, content, children}) => {
   const renderTitle = () =>
     titleRouteLink ? <Link to={titleRouteLink}>{title}</Link> : title;
+  const propsToInject = {
+    content,
+    // add aditional props here (e.g. styles), but note native DOM nodes will
+    // inherit non-standard DOM attribute e.g. styles on <a> element
+  }
   return (
     <article className={styles.article}>
       <header className={styles.headerContainer}>
         <h1 className={styles.headerTitle}>{renderTitle()}</h1>
         <time className={styles.headerDate}>{util.convertDateToString(date)}</time>
       </header>
-      {util.injectReactChildrenWithProps(children, {content, styles})}
+      {util.injectReactChildrenWithProps(children, {content})}
     </article>
   );
 };
@@ -29,12 +33,17 @@ const styles = {
   lastParagraph: 'lh-copy measure',
 };
 
+
 BaseArticle.propTypes = {
-  // titleRouteLink
+  titleRouteLink: React.PropTypes.oneOfType([
+    // TODO: Fix to accept either non-render type (null?)
+    // or rendered type (string)
+    React.PropTypes.any,
+  ]),
   title: React.PropTypes.string,
-  date: React.PropTypes.any, // double check!
+  date: React.PropTypes.any,
   content: React.PropTypes.string,
-  children: React.PropTypes.node, // will this accept multiple children?
+  children: React.PropTypes.node,
 };
 
 export default BaseArticle;

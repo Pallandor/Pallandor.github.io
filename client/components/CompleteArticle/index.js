@@ -3,16 +3,22 @@ import React from 'react';
 import BaseArticle from '../BaseArticle';
 import CustomReactMarkdown from '../CustomReactMarkdown';
 
-const CompleteArticle = ({title, date, content, children}) => (
+// CustomReactMarkdown gets injected with content props
+const CompleteArticle = ({title, date, content}) => (
   <BaseArticle
     title={title}
     date={date}
     content={content}
   >
-    <CustomReactMarkdown /> // gets injected with contet={}
+    <CustomReactMarkdown />
   </BaseArticle>
 );
 
-// TODO: Add proptypes validation
+
+CompleteArticle.propTypes = {
+  title: React.PropTypes.string,
+  date: React.PropTypes.any,
+  content: React.PropTypes.string,
+};
 
 export default CompleteArticle;

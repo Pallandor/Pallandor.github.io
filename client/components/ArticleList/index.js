@@ -7,7 +7,7 @@ const ArticleList = props => {
   const renderArticleExcerpts = articlesArr => articlesArr.map((article, ind) => (
     <ArticleExcerpt
       key={ind}
-      titleRouteLink={'about'}
+      articleLink={'about'}
       title={article.title}
       date={article.date}
       content={article.content}

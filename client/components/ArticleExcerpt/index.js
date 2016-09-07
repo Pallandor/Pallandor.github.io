@@ -4,18 +4,30 @@ import { Link } from 'react-router';
 import BaseArticle from '../BaseArticle';
 import CustomReactMarkdown from '../CustomReactMarkdown';
 
-const ArticleExcerpt = ({titleRouteLink, title, date, content}) => (
-  <BaseArticle
-    titleRouteLink={titleRouteLink}
-    title={title}
-    date={date}
-    content={content}
-  >
-    <CustomReactMarkdown /> // gets njected with content={}
-    <Link to={titleRouteLink}>Read more...</Link> // lol will also get 'content!'
-  </BaseArticle>
-);
+// CustomReactMarkdown gets injected with content props
+const ArticleExcerpt = ({articleLink, title, date, content}) => {
 
-// TODO: Add proptypes validation
+  // TODO: Fix babel config to support template literal strings
+  const getSnippet = content => content.slice(0,150) + '...';
+
+  return (
+    <BaseArticle
+      titleRouteLink={articleLink}
+      title={title}
+      date={date}
+      content={getSnippet(content)}
+    >
+      <CustomReactMarkdown />
+      <Link to={articleLink}>Read more...</Link>
+    </BaseArticle>
+  );
+};
+
+ArticleExcerpt.propTypes = {
+  titleRouteLink: React.PropTypes.string,
+  title: React.PropTypes.string,
+  date: React.PropTypes.any,
+  content: React.PropTypes.string,
+};
 
 export default ArticleExcerpt;
