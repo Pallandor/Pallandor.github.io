@@ -8,7 +8,7 @@ import CustomReactMarkdown from '../CustomReactMarkdown';
 const ArticleExcerpt = ({articleLink, title, date, content}) => {
   // TODO: Fix babel config to support template literal strings
   // TODO: Fix getSnippet, naive string splicer may split markdown
-  const getSnippet = content => content.slice(0,450) + '...';
+  const getSnippet = content => content.slice(0,200) + '...';
   return (
     <BaseArticle
       titleRouteLink={articleLink}
