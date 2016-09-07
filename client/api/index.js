@@ -1,7 +1,6 @@
 import { v4 } from 'node-uuid';
 
-// TODO: Implement utils to allow blog to consume external Node APIs
-// Currently: in-memory implementation of AJAX calls to mongo store for articles
+// Currently: in-memory implementation of AJAX calls to mongo store for articles, with mock content
 const fakeDatabase = {
   articles: [{
     id: v4(),
@@ -40,10 +39,14 @@ export const fetchArticles = () =>
   });
 
 // allow the server to handle computations wherever possible e.g state selection
+// but, would double API calls, instead of hydrating client state once...hmm..
+// also if state requested only once from server, ArticleExcerpt component logic
+// may make more sense...
+// TODO: Fix naive article excerpt slicing, as may cut through markdown
 export const fetchArticleExcerpts = () =>
 delay(1000).then(() => {
   return fakeDatabase.articles.map(article => ({
       ...article,
-      content: article.content.slice(0,150) + '...', // problem: may cut partway through markdown! adhere to simple rule?
+      content: article.content.slice(0,150) + '...',
     }));
   });

@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-
-/* TODO: Replace react-router links with real routes
-(will need to add to routes) */
+// TODO: Replace react-router links with real routes
 
 const NavBar = () => (
   <div>
@@ -19,7 +17,7 @@ const NavBar = () => (
   </div>
 );
 
-// tachyon styles
+// Tachyon styles
 const styles = {
   nav: 'dt w-100 border-box pa3 ph5-ns',
   rightContainer: 'dtc v-mid w-75 tr',
