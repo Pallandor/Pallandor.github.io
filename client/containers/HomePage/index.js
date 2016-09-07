@@ -6,6 +6,7 @@ import Loading from '../../components/Loading';
 import { getArticles } from '../../reducers/articles';
 import { getArticlesLoadingState } from '../../reducers/ui/articles';
 import { fetchArticles } from '../../actions/articles';
+import * as util from '../../util';
 
 const mapStoreToProps = store => ({
   articles: getArticles(store),
@@ -27,9 +28,10 @@ class HomePage extends Component {
   }
 
   _renderHomePage() {
+    let { children, articles } = this.props;
     return (
       <div>
-        <ArticleList articles={this.props.articles} />
+        {util.injectReactChildrenWithProps(children, { articles })}
       </div>
     );
   }
