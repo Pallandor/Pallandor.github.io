@@ -1,19 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import BaseArticle from '../BaseArticle';
 import CustomReactMarkdown from '../CustomReactMarkdown';
 
-// CustomReactMarkdown gets injected with content props
 const CompleteArticle = ({title, date, content}) => (
   <BaseArticle
     title={title}
     date={date}
-    content={content}
   >
-    <CustomReactMarkdown />
+    <div className={styles.bodyContainer}>
+      <CustomReactMarkdown
+        content={content}
+      />
+      <Link className={styles.link} to={'/'}>Back</Link>
+    </div>
   </BaseArticle>
 );
 
+const styles = {
+  link: 'f6 link dim dark-gray',
+  bodyContainer: 'fn fl-ns w-50-ns',
+}
 
 CompleteArticle.propTypes = {
   title: React.PropTypes.string,
