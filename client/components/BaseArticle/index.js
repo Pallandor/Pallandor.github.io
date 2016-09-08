@@ -4,11 +4,15 @@ import { Link } from 'react-router';
 
 import * as util from '../../util';
 
-const BaseArticle = ({titleRouteLink, title, date, children}) => {
+// make bgColor optional??
+const BaseArticle = ({titleRouteLink, title, date, bgColor, children}) => {
+  bgColor = bgColor ? bgColor : '';
   const renderTitle = () =>
     titleRouteLink ? <Link className={styles.link} to={titleRouteLink}>{title}</Link> : title;
+    // NOTE: Test what happens if bgColor is NOT passed, with this op?
+    // preference for template lit strings???? need to activate this!
   return (
-    <article className={styles.article}>
+    <article className={[styles.article, bgColor].join(' ').trim()}>
       <header className={styles.headerContainer}>
         <h1 className={styles.headerTitle}>{renderTitle()}</h1>
         <time className={styles.headerDate}>{util.convertDateToString(date)}</time>
@@ -28,6 +32,7 @@ const styles = {
 
 
 BaseArticle.propTypes = {
+  // Add BG COLOR??/
   titleRouteLink: React.PropTypes.oneOfType([
     // TODO: Fix to accept either non-render type (null?) or string render
     React.PropTypes.any,
@@ -35,6 +40,7 @@ BaseArticle.propTypes = {
   title: React.PropTypes.string,
   date: React.PropTypes.any,
   children: React.PropTypes.node,
+  bgColor: React.PropTypes.string, // not reqd.
 };
 
 export default BaseArticle;

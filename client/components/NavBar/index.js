@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const NavBar = () => (
-  <div>
     <nav className={styles.nav}>
     <Link className={styles.leftLink} to={'/'}>Home</Link>
       <div className={styles.rightContainer}>
@@ -12,10 +11,8 @@ const NavBar = () => (
         <Link className={styles.lastRightLink} to={'contact'}>Contact</Link>
       </div>
     </nav>
-  </div>
 );
 
-// Tachyon styles
 const styles = {
   nav: 'dt w-100 border-box pa3 ph5-ns',
   rightContainer: 'dtc v-mid w-75 tr',

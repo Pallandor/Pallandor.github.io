@@ -9,11 +9,13 @@ export const convertDateToString = dateObj => {
 };
 
 
-// shallow injection (1 child level deep)
+// shallow injection (one child deep)
 export const injectReactChildrenWithProps = (childComponents, propsToInject) =>
   React.Children.map(childComponents, child =>
     React.cloneElement(
       child,
       propsToInject, // shallow merge to existing props obj, so care!
-      // replacement children if required
     ));
+
+// tachyon bg color setter
+export const setBgColourByNumber = num => num % 2 === 0 ? 'bg-washed-green': 'bg-washed-yellow';
