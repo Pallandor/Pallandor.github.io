@@ -20,22 +20,38 @@ const mapDispatchToProps = dispatch => ({
 class HomePage extends Component {
   constructor(){
     super();
+    // TODO: Create bind utility
     this._renderHomePage = this._renderHomePage.bind(this);
+    this._containsRoute = this._containsRoute.bind(this);
   }
 
   componentWillMount(){
     this.props.fetchArticles();
   }
 
+  _containsRoute(path, str){
+    let regExpObj =  new RegExp(str,"gi");
+    return regExpObj.test(path);
+  }
+
   _renderHomePage() {
-    let { children, articles } = this.props;
-    // if URL/navigationstate  = A, return ArticleList (with articles)
-    // else rif = B , return CompleteArticle (with prop of sinlge SPECIFIC article!)
+    const { children, articles, location } = this.props;
+    let propsToInject = { articles };
+
+    if (this._containsRoute(location.pathname, 'articles')){
+      articles.some(article => {
+        if (article.id === this.props.params.id){
+          propsToInject = { ...article};
+          return true;
+        }
+      });
+    }
+
     return (
-      <div>
-        {util.injectReactChildrenWithProps(children, { articles })}
-      </div>
-    );
+        <div>
+          {util.injectReactChildrenWithProps(children, propsToInject)}
+        </div>
+      );
   }
 
   render() {

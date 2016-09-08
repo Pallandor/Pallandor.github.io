@@ -14,6 +14,6 @@ export const injectReactChildrenWithProps = (childComponents, propsToInject) =>
   React.Children.map(childComponents, child =>
     React.cloneElement(
       child,
-      propsToInject,
-      // replacement children if reqd
+      propsToInject, // shallow merge to existing props obj, so care!
+      // replacement children if required
     ));
