@@ -3,11 +3,12 @@ import React from 'react';
 import ArticleExcerpt from '../ArticleExcerpt';
 
 // TODO: generate titleRouteLink dynamically for client side routing
+// TODO: add support for template literal strings for interpolation
 const ArticleList = props => {
-  const renderArticleExcerpts = articlesArr => articlesArr.map((article, ind) => (
+  const renderArticleExcerpts = articlesArr => articlesArr.map((article) => (
     <ArticleExcerpt
-      key={ind}
-      articleLink={'about'}
+      key={article.id}
+      articleLink={'articles/' + article.id}
       title={article.title}
       date={article.date}
       content={article.content}

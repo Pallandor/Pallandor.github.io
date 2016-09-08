@@ -29,6 +29,8 @@ class HomePage extends Component {
 
   _renderHomePage() {
     let { children, articles } = this.props;
+    // if URL/navigationstate  = A, return ArticleList (with articles)
+    // else rif = B , return CompleteArticle (with prop of sinlge SPECIFIC article!)
     return (
       <div>
         {util.injectReactChildrenWithProps(children, { articles })}
