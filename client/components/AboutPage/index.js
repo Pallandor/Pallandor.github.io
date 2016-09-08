@@ -18,7 +18,7 @@ const staticContent = {
     into solvable sets. Always thinking about what scalable front-end applications
     would look like and optimal solutions to managing complex UI and state.
 
-    You'll always find me geeking out over new tech and relentlessly customising my
+    You'll usually find me geeking out over new tech and relentlessly customising my
     dev environment.
   `,
 };

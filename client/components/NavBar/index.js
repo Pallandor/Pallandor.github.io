@@ -8,7 +8,7 @@ const NavBar = () => (
       <div className={styles.rightContainer}>
         <Link className={styles.rightLink} to={'/'}>Articles</Link>
         <Link className={styles.rightLink} to={'about'}>About</Link>
-        <Link className={styles.rightLink} to={'about'}>Github</Link>
+        <a href='https://www.github.com/pallandor' className={styles.rightLink}>Github</a>
         <Link className={styles.lastRightLink} to={'contact'}>Contact</Link>
       </div>
     </nav>
