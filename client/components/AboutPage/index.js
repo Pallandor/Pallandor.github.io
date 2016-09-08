@@ -2,6 +2,7 @@ import React from 'react';
 
 import BasePage from '../BasePage';
 
+// TODO: Potentially separate Title and Content into components due to constant re-use
 const AboutPage = () => (
   <BasePage
     title={staticContent.title}

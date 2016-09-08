@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-// TODO: Replace react-router links with real routes
-
 const NavBar = () => (
   <div>
     <nav className={styles.nav}>
     <Link className={styles.leftLink} to={'/'}>Home</Link>
       <div className={styles.rightContainer}>
-        <Link className={styles.rightLink} to={'about'}>Articles</Link>
+        <Link className={styles.rightLink} to={'/'}>Articles</Link>
         <Link className={styles.rightLink} to={'about'}>About</Link>
         <Link className={styles.rightLink} to={'about'}>Github</Link>
-        <Link className={styles.lastRightLink} to={'about'}>Contact</Link>
+        <Link className={styles.lastRightLink} to={'contact'}>Contact</Link>
       </div>
     </nav>
   </div>
