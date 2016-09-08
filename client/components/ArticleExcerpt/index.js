@@ -4,19 +4,17 @@ import { Link } from 'react-router';
 import * as util from '../../util';
 import BaseArticle from '../BaseArticle';
 import CustomReactMarkdown from '../CustomReactMarkdown';
+import withBackgroundColour from '../HOCs/withBackgroundColour';
 
-// CustomReactMarkdown gets injected with content props
-const ArticleExcerpt = ({index, articleLink, title, date, content}) => {
+const ArticleExcerpt = ({articleLink, title, date, content}) => {
   // TODO: Fix babel config to support template literal strings
   // TODO: Fix getSnippet, naive string splicer may split markdown
   const getSnippet = content => content.slice(0,200) + '...';
-  const bgColor = util.setBgColourByNumber(index);
   return (
       <BaseArticle
         titleRouteLink={articleLink}
         title={title}
         date={date}
-        bgColor={bgColor}
       >
         <div className={styles.bodyContainer}>
           <CustomReactMarkdown
@@ -40,4 +38,4 @@ ArticleExcerpt.propTypes = {
   content: React.PropTypes.string,
 };
 
-export default ArticleExcerpt;
+export default withBackgroundColour(ArticleExcerpt);

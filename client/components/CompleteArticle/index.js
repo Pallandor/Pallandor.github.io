@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import BaseArticle from '../BaseArticle';
 import CustomReactMarkdown from '../CustomReactMarkdown';
+import withBackgroundColour from '../HOCs/withBackgroundColour';
 
 const CompleteArticle = ({title, date, content}) => (
   <BaseArticle
@@ -29,4 +30,4 @@ CompleteArticle.propTypes = {
   content: React.PropTypes.string,
 };
 
-export default CompleteArticle;
+export default withBackgroundColour(CompleteArticle);
