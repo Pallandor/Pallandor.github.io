@@ -11,6 +11,9 @@ node_modules
 # Temporarily removed to deploy to Github Pages from sub-folder
 # dist
 
+# API keys and secrets
+.env
+
 # Editor temporary files
 *~
 \#*#

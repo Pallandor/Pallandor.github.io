@@ -2,6 +2,10 @@ const express = require('express');
 const winston = require('winston');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+
+// load environment variables
+dotenv.load({path: __dirname + '/.env_example'});
 
 const app = express();
 const PORT = process.env.PORT || 8080;
