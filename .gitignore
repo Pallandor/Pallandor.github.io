@@ -13,6 +13,7 @@ node_modules
 
 # API keys and secrets
 .env
+.env_example
 
 # Editor temporary files
 *~
