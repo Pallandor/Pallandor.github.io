@@ -1,8 +1,6 @@
 import React from 'react';
-
 import BasePage from '../BasePage';
 
-// TODO: Potentially separate Title and Content into components due to constant re-use
 const AboutPage = () => (
   <BasePage
     title={staticContent.title}
@@ -16,11 +14,7 @@ const staticContent = {
   Australian full-stack software engineer fluent in Javascript (from React.js and
     Redux to Node.js, MongoDB and Express). Loves deconstructing hopeless problems
     into solvable sets. Always thinking about what scalable front-end applications
-    would look like and optimal solutions to managing complex UI and state.
-
-    You'll usually find me geeking out over new tech and relentlessly customising my
-    dev environment.
-  `,
+    would look like and optimal solutions to managing complex UI and state.`,
 };
 
 export default AboutPage;
