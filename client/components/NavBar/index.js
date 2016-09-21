@@ -7,7 +7,7 @@ const NavBar = () => (
       <div className={styles.rightContainer}>
         <Link className={styles.rightLink} to={'/'}>Articles</Link>
         <Link className={styles.rightLink} to={'about'}>About</Link>
-        <a href='https://www.github.com/pallandor' className={styles.rightLink}>Github</a>
+        <a href='https://www.github.com/pallandor' target='_blank' className={styles.rightLink}>Github</a>
         <Link className={styles.lastRightLink} to={'contact'}>Contact</Link>
       </div>
     </nav>
