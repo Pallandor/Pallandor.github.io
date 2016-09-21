@@ -21,7 +21,7 @@ module.exports = {
 
   module: {
     loaders: [
-      // loaders.css,
+      loaders.css,
       loaders.js,
       loaders.json,
     ],

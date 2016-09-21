@@ -1,8 +1,9 @@
 import React from 'react';
+import Spinner from 'react-spinkit';
 
 const Loading = () => (
   <div className={styles.header}>
-    <p className={styles.h1}>...Loading</p>
+    <Spinner spinnerName="three-bounce" noFadeIn />
   </div>
 );
 
